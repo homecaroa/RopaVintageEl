@@ -27,6 +27,13 @@ src/data/site.config.js · products.js · info-pages.js
 src/js/main.js · ui.js · layout.js · home.js · catalog.js · categoria.js · product.js · info.js · seo.js · validar.js
 Eliminados (borrar en GitHub si siguen): assets/favicon.svg, carrito.html, encuentra.html, pack.html, src/js/cart.js, src/js/carrito.js, src/js/encuentra.js.
 
+## Publicación
+- Publicada en GitHub Pages: https://homecaroa.github.io/RopaVintageEl/ (subcarpeta del repositorio; las rutas relativas funcionan). `robots.txt` y `sitemap.xml` solo surten efecto con dominio propio en la raíz.
+- Actualizar siempre con el **zip completo** (`caroa-vintage-completo.zip`) para no mezclar versiones.
+- Si aparece «No se ha podido cargar esta sección» o se ve el logo antiguo: es una mezcla de archivos nuevos y antiguos (subida parcial o caché del navegador). Subir el zip completo, esperar 1–2 minutos a que Pages despliegue y recargar con Ctrl+F5 (Cmd+Shift+R en Mac).
+- Archivos antiguos que deben haberse borrado: carrito.html, encuentra.html, pack.html, src/js/cart.js, src/js/carrito.js, src/js/encuentra.js, assets/favicon.svg.
+- Al imprimir la web a PDF no se imprimen los fondos: botones y pie se ven pálidos; es normal.
+
 ## Qué hay
 - Portada: propuesta de valor, últimas prendas, categorías con prendas, cómo comprar, ventajas, botones a tus perfiles, FAQ.
 - Catálogo: filtros por categoría, marca y talla; orden por recientes/precio; vendidas al final; URL compartible.
