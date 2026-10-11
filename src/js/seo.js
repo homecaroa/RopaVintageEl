@@ -52,7 +52,7 @@ export function aplicarSeo() {
   meta('name', 'twitter:image', `${base}/${SITE.marca.ogImagen}`);
 
   if (archivo === 'index.html') {
-    const perfiles = Object.entries(SITE.plataformas).map(([k, pl]) => urlPlataforma(k, pl.perfil)).filter(Boolean);
+    const perfiles = [...Object.entries(SITE.plataformas), ...Object.entries(SITE.redes)].map(([k, pl]) => urlPlataforma(k, pl.perfil)).filter(Boolean);
     jsonLd('ld-org', { '@context': 'https://schema.org', '@type': 'Organization', name: SITE.marca.nombre, url: `${base}/`, logo: `${base}/${SITE.marca.logo}`, ...(perfiles.length ? { sameAs: perfiles } : {}) });
     jsonLd('ld-web', { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.marca.nombre, url: `${base}/`, inLanguage: 'es-ES' });
   }

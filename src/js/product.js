@@ -1,4 +1,4 @@
-// Ficha de prenda: prenda.html?id=<slug>. La compra se hace en Vinted/Wallapop.
+// Ficha de prenda: prenda.html?id=<slug>. La compra se hace en Vinted.
 import { PRODUCTS, CATEGORIAS, CATEGORIA_URL, CONDICIONES, MEDIDAS, ETIQUETA_DISPONIBILIDAD } from '../data/products.js';
 import { SITE } from '../data/site.config.js';
 import { h, imagenPrenda, tarjetaPrenda, botonPlataforma, urlPlataforma, precioTexto } from './ui.js';
@@ -80,7 +80,7 @@ function relacionadas(p) {
 
 // Datos estructurados solo cuando la prenda ya no es de ejemplo (deben coincidir con lo que ve el usuario).
 function jsonLd(p) {
-  const url = ['vinted', 'wallapop'].map((k) => urlPlataforma(k, p.enlaces && p.enlaces[k])).find(Boolean);
+  const url = ['vinted'].map((k) => urlPlataforma(k, p.enlaces && p.enlaces[k])).find(Boolean);
   const datos = {
     '@context': 'https://schema.org', '@type': 'Product', name: p.nombre, description: p.descripcion, sku: p.id,
     brand: { '@type': 'Brand', name: p.marca }, itemCondition: 'https://schema.org/UsedCondition',
@@ -108,7 +108,7 @@ export function iniciar() {
     bloque('Descripción', h('p', { text: p.descripcion })),
     medidas(p), estado(p),
     bloque('Compra y envío',
-      h('p', {}, 'Cada compra se formaliza en Vinted o Wallapop, que gestionan el pago, el envío y las reclamaciones. Más información en ',
+      h('p', {}, 'Cada compra se formaliza en Vinted, que gestiona el pago, el envío y las reclamaciones. Más información en ',
         h('a', { href: 'info.html?p=envios-devoluciones' }, 'Envíos y devoluciones'), ' y en ', h('a', { href: 'index.html#como' }, 'Cómo comprar'), '.')),
     relacionadas(p)
   ].filter(Boolean));

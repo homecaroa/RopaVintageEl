@@ -19,8 +19,8 @@ const COLUMNAS = [
 
 // Enlaces externos a los perfiles configurados (solo si son válidos).
 function perfilesExternos() {
-  return Object.entries(SITE.plataformas)
-    .map(([clave, pl]) => ({ nombre: pl.nombre, url: urlPlataforma(clave, pl.perfil) }))
+  return [...Object.entries(SITE.plataformas), ...Object.entries(SITE.redes)]
+    .map(([clave, pl]) => ({ clave, nombre: pl.nombre, url: urlPlataforma(clave, pl.perfil) }))
     .filter((x) => x.url);
 }
 
@@ -54,7 +54,7 @@ export function montarPie() {
   const columnas = COLUMNAS.map(([titulo, enlaces]) => [titulo, enlaces.map(([t, href]) => h('li', {}, h('a', { href }, t)))]);
   columnas.splice(1, 0, ['Categorías', Object.entries(CATEGORIA_URL).map(([k, url]) => h('li', {}, h('a', { href: url }, CATEGORIAS[k])))]);
   const ext = perfilesExternos();
-  if (ext.length) columnas[0][1].push(...ext.map((x) => h('li', {}, externo(`Comprar en ${x.nombre}`, x.url))));
+  if (ext.length) columnas[0][1].push(...ext.map((x) => h('li', {}, externo(SITE.plataformas[x.clave] ? `Comprar en ${x.nombre}` : `Síguenos en ${x.nombre}`, x.url))));
   cont.replaceChildren(h('div', { class: 'wrap' },
     h('div', { class: 'pie-grid' },
       h('div', {}, h('p', { class: 'pie-marca', text: SITE.marca.nombre }), h('p', { text: SITE.marca.descripcion })),

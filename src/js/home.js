@@ -1,4 +1,4 @@
-// Portada: últimas prendas, categorías con prendas y botones a los perfiles de Vinted/Wallapop.
+// Portada: últimas prendas, categorías con prendas y botones a tus perfiles de Vinted e Instagram.
 import { PRODUCTS, CATEGORIAS, CATEGORIA_URL } from '../data/products.js';
 import { SITE } from '../data/site.config.js';
 import { h, tarjetaPrenda, ordenarPrendas, botonPlataforma } from './ui.js';
@@ -20,5 +20,6 @@ export function iniciar() {
     : [h('p', { class: 'vacio', text: 'Las categorías aparecerán cuando haya prendas publicadas.' })]));
 
   document.getElementById('plataformas-botones')?.replaceChildren(
-    ...Object.entries(SITE.plataformas).map(([clave, pl]) => botonPlataforma(clave, pl.perfil, `Mi perfil en ${pl.nombre}`, 'btn btn-primario')));
+    ...Object.entries(SITE.plataformas).map(([clave, pl]) => botonPlataforma(clave, pl.perfil, `Mi perfil en ${pl.nombre}`, 'btn btn-primario')),
+    ...Object.entries(SITE.redes).map(([clave, r]) => botonPlataforma(clave, r.perfil, `Síguenos en ${r.nombre}`, 'btn btn-sec')));
 }

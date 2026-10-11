@@ -17,9 +17,12 @@ export const SITE = {
   },
   dominio: null, // p. ej. 'https://midominio.es' cuando exista
   empresa: { titular: 'Caroa', nif: null, domicilio: null, email: null, telefono: null },
-  // URLs de TUS perfiles. Deben ser https y de vinted.* o wallapop.com; si no, se ignoran.
+  // URL de TU perfil de Vinted (donde se compra). Debe ser https y de vinted.*; si no, se ignora.
   plataformas: {
-    vinted: { nombre: 'Vinted', perfil: null },
-    wallapop: { nombre: 'Wallapop', perfil: null }
+    vinted: { nombre: 'Vinted', perfil: null }
+  },
+  // URL de TU perfil de Instagram (solo para seguirte y contactar). Debe ser https y de instagram.com.
+  redes: {
+    instagram: { nombre: 'Instagram', perfil: null }
   }
 };

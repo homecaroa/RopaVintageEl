@@ -1,5 +1,5 @@
 // Fuente única de datos de las prendas. Las entradas "Ejemplo" son de DEMOSTRACIÓN (provisional: true):
-// sustitúyelas por prendas reales. Cada prenda enlaza a su anuncio en Vinted y/o Wallapop (enlaces).
+// sustitúyelas por prendas reales. Cada prenda enlaza a su anuncio en Vinted (enlaces).
 export const ESTADOS = ['borrador', 'publicado'];
 export const DISPONIBILIDADES = ['disponible', 'reservado', 'vendido'];
 export const ETIQUETA_DISPONIBILIDAD = { disponible: 'Disponible', reservado: 'Reservada', vendido: 'Vendida' };
@@ -51,9 +51,9 @@ export const PRODUCTS = [
     medidas: { pecho: '58 cm', manga: '64 cm', largo: '70 cm' },
     condicion: 'muy-bueno', defectos: 'Ejemplo: sin defectos visibles.', etiqueta: 'Ejemplo: etiqueta original visible.',
     descripcion: 'Descripción de ejemplo para ver cómo se presenta una prenda. Sustituir por la descripción real.',
-    precio: 35, imagenes: [], enlaces: { vinted: null, wallapop: null },
+    precio: 35, imagenes: [], enlaces: { vinted: null },
     estado: 'publicado', disponibilidad: 'disponible', fecha: '2026-10-10', provisional: true,
-    seo: { titulo: 'Chaqueta deportiva vintage años 90 talla L', descripcion: 'Chaqueta deportiva vintage de los años 90, talla L, con medidas reales, estado explicado y enlace de compra en Vinted y Wallapop.' }
+    seo: { titulo: 'Chaqueta deportiva vintage años 90 talla L', descripcion: 'Chaqueta deportiva vintage de los años 90, talla L, con medidas reales, estado explicado y enlace de compra en Vinted.' }
   },
   {
     id: 'ej-vaqueros-01', slug: 'ejemplo-vaqueros', nombre: 'Ejemplo: vaqueros clásicos',
@@ -61,7 +61,7 @@ export const PRODUCTS = [
     medidas: { cintura: '40 cm', entrepierna: '80 cm', largo: '102 cm' },
     condicion: 'bueno', defectos: 'Ejemplo: ligero desgaste en los bajos.', etiqueta: 'Ejemplo: etiqueta interior legible.',
     descripcion: 'Descripción de ejemplo para ver cómo se presenta una prenda. Sustituir por la descripción real.',
-    precio: 32, imagenes: [], enlaces: { vinted: null, wallapop: null },
+    precio: 32, imagenes: [], enlaces: { vinted: null },
     estado: 'publicado', disponibilidad: 'disponible', fecha: '2026-10-09', provisional: true,
     seo: { titulo: 'Vaqueros vintage clásicos talla 32/32', descripcion: 'Vaqueros vintage de hombre, talla 32/32, con medidas reales de cintura y entrepierna, estado explicado y enlace de compra en Vinted.' }
   },
@@ -71,9 +71,9 @@ export const PRODUCTS = [
     medidas: { pecho: '54 cm', manga: '62 cm', largo: '66 cm' },
     condicion: 'con-detalles', defectos: 'Ejemplo: pequeño desgaste en puños.', etiqueta: 'Ejemplo: etiqueta bordada.',
     descripcion: 'Descripción de ejemplo para ver cómo se presenta una prenda. Sustituir por la descripción real.',
-    precio: 24, imagenes: [], enlaces: { vinted: null, wallapop: null },
+    precio: 24, imagenes: [], enlaces: { vinted: null },
     estado: 'publicado', disponibilidad: 'reservado', fecha: '2026-10-08', provisional: true,
-    seo: { titulo: 'Sudadera vintage de marca talla M', descripcion: 'Sudadera vintage de marca de los años 2000, talla M, con medidas reales, detalles de estado y enlace de compra en Vinted y Wallapop.' }
+    seo: { titulo: 'Sudadera vintage de marca talla M', descripcion: 'Sudadera vintage de marca de los años 2000, talla M, con medidas reales, detalles de estado y enlace de compra en Vinted.' }
   },
   {
     id: 'ej-camiseta-01', slug: 'ejemplo-camiseta-y2k', nombre: 'Ejemplo: camiseta gráfica Y2K',
@@ -81,7 +81,7 @@ export const PRODUCTS = [
     medidas: { pecho: '56 cm', largo: '72 cm' },
     condicion: 'muy-bueno', defectos: 'Ejemplo: estampado sin grietas.', etiqueta: null,
     descripcion: 'Ejemplo de prenda ya vendida, para ver cómo se muestra ese estado.',
-    precio: 22, imagenes: [], enlaces: { vinted: null, wallapop: null },
+    precio: 22, imagenes: [], enlaces: { vinted: null },
     estado: 'publicado', disponibilidad: 'vendido', fecha: '2026-10-01', provisional: true,
     seo: { titulo: 'Camiseta gráfica Y2K vintage talla L', descripcion: 'Camiseta gráfica vintage Y2K de principios de los 2000, talla L, con medidas reales y estado explicado.' }
   }

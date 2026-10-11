@@ -18,10 +18,10 @@ export function h(tag, props = {}, ...hijos) {
   return nodo;
 }
 
-// Solo se aceptan enlaces https a Vinted o Wallapop.
+// Solo se aceptan enlaces https a Vinted o Instagram.
 const HOSTS = {
   vinted: /^https:\/\/([a-z0-9-]+\.)*vinted\.[a-z]{2,}(\/|$)/i,
-  wallapop: /^https:\/\/([a-z0-9-]+\.)*wallapop\.com(\/|$)/i
+  instagram: /^https:\/\/([a-z0-9-]+\.)*instagram\.com(\/|$)/i
 };
 export function urlPlataforma(clave, url) {
   return typeof url === 'string' && HOSTS[clave] && HOSTS[clave].test(url) ? url : null;
@@ -29,7 +29,7 @@ export function urlPlataforma(clave, url) {
 
 export function botonPlataforma(clave, url, texto, clase = 'btn btn-sec') {
   const ok = urlPlataforma(clave, url);
-  const nombre = SITE.plataformas[clave].nombre;
+  const nombre = (SITE.plataformas[clave] || SITE.redes[clave]).nombre;
   if (!ok) return h('span', { class: 'btn btn-pendiente', 'aria-disabled': 'true', text: `${nombre}: enlace pendiente` });
   return h('a', { class: clase, href: ok, target: '_blank', rel: 'noopener noreferrer' },
     texto || `Ver en ${nombre}`, h('span', { class: 'sr-only', text: ' (se abre en una pestaña nueva)' }));

@@ -1,9 +1,9 @@
 # ESTADO DEL PROYECTO · Caroa Vintage
 
-Última actualización: Marca Caroa Vintage, logo y SEO inicial · 11 oct 2026
+Última actualización (Wallapop sustituido por Instagram): Marca Caroa Vintage, logo y SEO inicial · 11 oct 2026
 
 ## Cambio de rumbo
-El proyecto ya no es una tienda de regalos. Ahora es un **escaparate de ropa vintage de marca** (España y Europa; adultos de 25–40) que redirige a los perfiles del usuario en **Vinted y Wallapop**. Marca: **Caroa Vintage** (logo: daga minimalista crema sobre negro con el texto CAROA; versiones en `assets/`: logo-caroa.png para fondos oscuros, logo-cabecera.png para la cabecera, logo-512.png, favicon y og-caroa.png). Titular: Caroa, particular por ahora. Se mantiene la estructura de la web anterior. Se eliminaron carrito, "Encuentra tu regalo", packs y pagos. Fuente de contexto: estudio de mercado y plan de negocio de ropa vintage (proyecto).
+El proyecto ya no es una tienda de regalos. Ahora es un **escaparate de ropa vintage de marca** (España y Europa; adultos de 25–40) que redirige a los perfiles del usuario en **Vinted** (compra) e **Instagram** (seguir y contactar). Marca: **Caroa Vintage** (logo: daga minimalista crema sobre negro con el texto CAROA; versiones en `assets/`: logo-caroa.png para fondos oscuros, logo-cabecera.png para la cabecera, logo-512.png, favicon y og-caroa.png). Titular: Caroa, particular por ahora. Se mantiene la estructura de la web anterior. Se eliminaron carrito, "Encuentra tu regalo", packs y pagos. Fuente de contexto: estudio de mercado y plan de negocio de ropa vintage (proyecto).
 Principio del estudio: validar en marketplaces antes de una tienda propia; la web no cobra ni gestiona pedidos.
 
 ## Reglas de trabajo
@@ -15,7 +15,7 @@ Principio del estudio: validar en marketplaces antes de una tienda propia; la we
 - HTML/CSS/JS vanilla con módulos ES6, sin build; GitHub Pages; rutas relativas.
 - Datos: `src/data/products.js` (prendas), `site.config.js` (marca, empresa, perfiles de plataformas), `info-pages.js` (textos).
 - Páginas: `<body data-page>` + `main.js` + módulo `src/js/<pagina>.js` con `iniciar()`.
-- Enlaces externos: solo https a vinted.* o wallapop.com (validados en `ui.js`); se abren con `rel="noopener noreferrer"`. Sin cookies, sin almacenamiento local, sin analítica.
+- Enlaces externos: solo https a vinted.* o instagram.com (validados en `ui.js`: vinted.* y instagram.com); se abren con `rel="noopener noreferrer"`. Sin cookies, sin almacenamiento local, sin analítica.
 - SEO desde el inicio: guía y lista de lanzamiento en `docs/SEO.md`; páginas estáticas por categoría con texto propio; canonical, Open Graph y JSON-LD se activan al definir `dominio`.
 - Paleta: navy #1E3153, loden #56643A, burdeos #7A1F2E sobre base clara #F7F3EA.
 
@@ -30,12 +30,12 @@ Eliminados (borrar en GitHub si siguen): assets/favicon.svg, carrito.html, encue
 ## Qué hay
 - Portada: propuesta de valor, últimas prendas, categorías con prendas, cómo comprar, ventajas, botones a tus perfiles, FAQ.
 - Catálogo: filtros por categoría, marca y talla; orden por recientes/precio; vendidas al final; URL compartible.
-- Ficha: galería, marca/época/talla, precio orientativo, botones «Ver en Vinted/Wallapop» (enlace al anuncio de esa prenda), medidas reales, estado y autenticidad, prendas relacionadas, JSON-LD solo cuando la prenda deja de ser ejemplo.
+- Ficha: galería, marca/época/talla, precio orientativo, botón «Ver en Vinted» (enlace al anuncio de esa prenda), medidas reales, estado y autenticidad, prendas relacionadas, JSON-LD solo cuando la prenda deja de ser ejemplo.
 - Info: FAQ, Quiénes somos, Envíos y devoluciones, Contacto, Aviso legal, Condiciones, Privacidad, Cookies (textos orientativos con datos pendientes resaltados).
 - Categorías (del estudio): chaquetas deportivas, denim, polos/jerséis/sudaderas, workwear y outdoor, camisetas gráficas y Y2K.
 
 ## Pendiente de ti
-- U1 URLs de tus perfiles de Vinted y Wallapop → `site.config.js` (`plataformas`). Mientras estén vacías, los botones aparecen como "enlace pendiente".
+- U1 URLs de tus perfiles de Vinted y de Instagram → `site.config.js` (`plataformas.vinted` y `redes.instagram`). Mientras estén vacías, los botones aparecen como "enlace pendiente".
 - U2 Comprar el dominio (y comprobar que "Caroa Vintage" está libre como dominio y marca) → seguir `docs/SEO.md`.
 - U3 Primeras prendas reales: fotos propias (en `assets/img/`), marca, talla, medidas, estado, defectos, precio y URL del anuncio. Las 4 prendas "Ejemplo" son de demostración y hay que borrarlas.
 - U4 NIF, domicilio y correo del titular (el titular "Caroa" ya está): `site.config.js`.
@@ -49,7 +49,7 @@ Eliminados (borrar en GitHub si siguen): assets/favicon.svg, carrito.html, encue
 - L4 Mejoras de ficha: más fotos, guía de tallas, enlace "Compartir".
 
 ## Fuera de la web
-Compras a proveedores, fotografía, publicación de anuncios, gestión de pedidos, envíos, devoluciones y facturación se hacen en Vinted/Wallapop y con la gestoría. Una tienda propia solo cuando haya ventas repetidas, márgenes demostrados y capacidad de captar clientes (criterio del estudio).
+Compras a proveedores, fotografía, publicación de anuncios, gestión de pedidos, envíos, devoluciones y facturación se hacen en Vinted y con la gestoría. Una tienda propia solo cuando haya ventas repetidas, márgenes demostrados y capacidad de captar clientes (criterio del estudio).
 
 ## Pruebas realizadas
 Chromium local (Playwright), 16 vistas (incluye 5 categorías); títulos y descripciones únicos (títulos 24–59 caracteres, descripciones 115–156); canonical, Open Graph, Organization, WebSite y BreadcrumbList verificados con dominio simulado; sitemap con 19 URL. Antes, 13 vistas: 1 H1 por página, sin saltos de encabezado, 0 errores de consola, 18 enlaces internos sin roturas. Filtros y orden del catálogo, ficha, estado "vendida", validación de URLs (https válida aceptada; http o dominio ajeno rechazados), enlaces externos con `target=_blank` y `rel=noopener noreferrer`. No probado en GitHub Pages ni en dispositivos reales.

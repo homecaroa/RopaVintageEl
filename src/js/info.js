@@ -11,7 +11,7 @@ function valores() {
     titular: e.titular, nif: e.nif, domicilio: e.domicilio, email: e.email, telefono: e.telefono,
     marca: SITE.marca.nombre,
     vinted: urlPlataforma('vinted', SITE.plataformas.vinted.perfil),
-    wallapop: urlPlataforma('wallapop', SITE.plataformas.wallapop.perfil)
+    instagram: urlPlataforma('instagram', SITE.redes.instagram.perfil)
   };
 }
 
@@ -31,7 +31,7 @@ function texto(cadena) {
       const dato = val[m[4]];
       if (!dato) partes.push(h('mark', { class: 'pendiente', text: 'Pendiente de confirmar' }));
       else if (m[4] === 'email') partes.push(h('a', { href: `mailto:${dato}` }, dato));
-      else if (m[4] === 'vinted' || m[4] === 'wallapop') partes.push(h('a', { href: dato, target: '_blank', rel: 'noopener noreferrer' }, SITE.plataformas[m[4]].nombre));
+      else if (m[4] === 'vinted' || m[4] === 'instagram') partes.push(h('a', { href: dato, target: '_blank', rel: 'noopener noreferrer' }, dato.replace(/^https:\/\//, '').replace(/\/$/, '')));
       else partes.push(dato);
     }
   }

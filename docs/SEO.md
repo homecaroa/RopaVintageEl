@@ -29,7 +29,7 @@ Las palabras clave son hipótesis sin volumen de búsqueda verificado. Cuando ha
 
 ## Lista de lanzamiento (cuando compres el dominio)
 1. Poner el dominio en `site.config.js` (`dominio: 'https://tudominio.es'`): activa canonical, Open Graph, imagen para redes y datos estructurados (Organization, WebSite, BreadcrumbList).
-2. Poner las URLs de tus perfiles en `plataformas` (también alimentan `sameAs`).
+2. Poner las URLs de tus perfiles en `plataformas.vinted` y `redes.instagram` (también alimentan `sameAs`).
 3. Abrir `herramientas/sitemap.html`, copiar el resultado a `sitemap.xml` en la raíz y añadir en `robots.txt` la línea `Sitemap: https://tudominio.es/sitemap.xml`.
 4. Quitar `<meta name="robots" content="noindex, nofollow">` de todas las páginas HTML.
 5. Sustituir las prendas "Ejemplo" por reales y poner `provisional: false` (activa los datos estructurados de producto).
