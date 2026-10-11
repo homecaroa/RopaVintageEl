@@ -34,7 +34,7 @@
       const base = SITE.dominio.replace(/\/$/, '');
       const rutas = ['', 'catalogo.html',
         ...Object.keys(INFO).map((k) => `info.html?p=${k}`),
-        ...PRODUCTS.filter((p) => p.estado !== 'borrador').map((p) => `pack.html?id=${encodeURIComponent(p.slug)}`)];
+        ...PRODUCTS.filter((p) => p.estado === 'publicado').map((p) => `prenda.html?id=${encodeURIComponent(p.slug)}`)];
       salida.value = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         rutas.map((r) => `  <url><loc>${esc(`${base}/${r}`)}</loc></url>`).join('\n') + '\n</urlset>\n';
       estado.textContent = `${rutas.length} URL generadas. Recuerda quitar "noindex" de las páginas al lanzar.`;

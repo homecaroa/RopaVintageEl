@@ -7,15 +7,15 @@ import { h } from './ui.js';
 const PAGINAS = {
   home: () => import('./home.js'),
   catalogo: () => import('./catalog.js'),
-  pack: () => import('./product.js'),
-  carrito: () => import('./carrito.js'),
+  prenda: () => import('./product.js'),
   info: () => import('./info.js')
 };
 
 async function arrancar() {
   const pagina = document.body.dataset.page;
-  const esFaq = pagina === 'info' && new URLSearchParams(location.search).get('p') === 'faq';
-  montarCabecera(esFaq ? 'faq' : pagina);
+  const p = new URLSearchParams(location.search).get('p');
+  const activa = pagina === 'prenda' ? 'catalogo' : pagina === 'info' ? p : pagina;
+  montarCabecera(activa);
   montarPie();
 
   for (const { producto, errores } of validarProductos()) {

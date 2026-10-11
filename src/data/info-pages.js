@@ -1,50 +1,48 @@
 // Contenido de las páginas informativas y legales (info.html?p=<clave>).
-// Marcadores: {titular} {nif} {domicilio} {email} {telefono} {marca} {costeEnvio} {plazoPreparacion} {plazoEntrega}
+// Marcadores: {titular} {nif} {domicilio} {email} {telefono} {marca} {vinted} {wallapop}
 //   → se rellenan desde site.config.js; si falta el dato aparece "Pendiente de confirmar".
-// {?Texto} → dato pendiente de decidir (se muestra resaltado). [texto](info.html?p=envios) → enlace interno.
+// {?Texto} → dato pendiente de decidir (se muestra resaltado). [texto](info.html?p=faq) → enlace interno.
 // Los textos legales son ORIENTATIVOS: deben revisarse con un profesional antes de vender.
 export const INFO = {
   faq: {
     titulo: 'Preguntas frecuentes',
-    descripcion: 'Respuestas a las dudas habituales sobre los packs, el envío y las devoluciones.',
+    descripcion: 'Respuestas a las dudas habituales sobre cómo comprar, tallas, autenticidad, envíos y devoluciones.',
     secciones: [
-      { h: '¿Qué lleva cada caja?', p: ['Entre 3 y 4 artículos relacionados con un perfil o afición. La lista exacta aparece en la ficha de cada pack.'] },
-      { h: '¿Y si no sé qué le gusta?', p: ['Empieza por la ocasión o por el pack más versátil del [catálogo](catalogo.html). Cada ficha indica para qué tipo de persona encaja.'] },
-      { h: '¿Cuánto cuesta el envío y cuándo llega?', p: ['Gastos de envío: {costeEnvio}. Preparación: {plazoPreparacion}. Entrega: {plazoEntrega}.', 'Más detalle en [Envíos](info.html?p=envios). El importe final se muestra en el carrito antes de pagar.'] },
-      { h: '¿Puedo devolver un pedido?', p: ['Consulta [Devoluciones y desistimiento](info.html?p=devoluciones).'] },
-      { h: '¿Las imágenes son reales?', p: ['Durante la construcción de la web, las imágenes y los contenidos marcados como provisionales son de demostración y se sustituirán por fotografías del pack real.'] }
+      { h: '¿Cómo compro una prenda?', p: ['Entra en la ficha de la prenda y pulsa «Ver en Vinted» o «Ver en Wallapop». La compra, el pago y el envío se hacen en esa plataforma.'] },
+      { h: '¿Se paga o se piden datos en esta web?', p: ['No. Esta web es un escaparate: no procesa pagos ni pedidos y no guarda datos de compra.'] },
+      { h: '¿Cómo sé qué talla me queda?', p: ['Cada ficha incluye medidas reales de la prenda. Compáralas con una prenda tuya que te quede bien: la talla de la etiqueta puede variar entre épocas y marcas.'] },
+      { h: '¿Cómo sé que la prenda es auténtica?', p: ['Cada ficha indica la marca, la etiqueta y el estado. {?Política de autenticidad y qué hacer si hay dudas}.'] },
+      { h: '¿Cuánto cuesta el envío y puedo devolver?', p: ['Depende de la plataforma y del anuncio. Más información en [Envíos y devoluciones](info.html?p=envios-devoluciones).'] },
+      { h: '¿Las prendas de la web son reales?', p: ['Mientras se construye la web, las prendas marcadas como ejemplo son de demostración y se sustituirán por prendas reales con fotos propias.'] }
     ]
   },
-  envios: {
-    titulo: 'Envíos',
-    descripcion: 'Zonas, gastos y plazos de envío de los packs de regalo.',
+  'quienes-somos': {
+    titulo: 'Quiénes somos',
+    descripcion: 'Qué es este proyecto de ropa vintage de marca y cómo seleccionamos cada prenda.',
     secciones: [
-      { h: 'Zona y transportista', p: ['Zona de entrega: {?Zona de entrega (por ejemplo, península)}.', 'Transportista: {?Transportista elegido}.'] },
-      { h: 'Gastos de envío', p: ['Gastos de envío: {costeEnvio}. Se muestran en el carrito antes de pagar.'] },
-      { h: 'Plazos', p: ['Preparación del pedido: {plazoPreparacion}.', 'Entrega: {plazoEntrega}.', 'Los packs en preventa indican en su ficha la fecha estimada de envío.'] },
-      { h: 'Seguimiento', p: ['{?Indicar si se ofrece número de seguimiento}'] },
-      { h: 'Incidencias', p: ['Si tu pedido llega dañado o con artículos que no corresponden, escríbenos a {email} indicando tu pedido.'] }
+      { h: 'Qué es {marca}', p: ['Una selección de ropa vintage de marca de los años 80, 90 y 2000, que se vende a través de Vinted y Wallapop.'] },
+      { h: 'Cómo seleccionamos', p: ['Elegimos las prendas una a una. Cada ficha incluye fotografías propias, medidas reales, el estado explicado y la marca y el modelo cuando se pueden identificar.'] },
+      { h: 'Nuestra historia', p: ['{?Historia y propósito del proyecto}.'] },
+      { h: 'Dónde comprar', p: ['Perfil en Vinted: {vinted}.', 'Perfil en Wallapop: {wallapop}.'] }
     ]
   },
-  devoluciones: {
-    titulo: 'Devoluciones y desistimiento',
-    descripcion: 'Cómo ejercer el derecho de desistimiento y devolver un pedido.',
+  'envios-devoluciones': {
+    titulo: 'Envíos y devoluciones',
+    descripcion: 'Cómo se gestionan los envíos, las devoluciones y las reclamaciones de las compras en Vinted y Wallapop.',
     revisionLegal: true,
     secciones: [
-      { h: 'Derecho de desistimiento', p: ['Con carácter general, quien compra como consumidor a distancia en España y la UE dispone de 14 días naturales para desistir del contrato sin indicar motivo, desde que recibe el pedido.'] },
-      { h: 'Excepciones', p: ['La ley prevé excepciones, por ejemplo bienes precintados que no sean aptos para devolver por razones de salud o higiene una vez abiertos, o bienes perecederos. Qué artículos de cada pack se ven afectados depende de su contenido final: {?Revisar según el contenido real de cada pack}.'] },
-      { h: 'Cómo desistir', p: ['Comunica tu decisión por escrito a {email}. {?Modelo de formulario de desistimiento}.'] },
-      { h: 'Gastos de devolución', p: ['{?Quién asume el coste de la devolución}.'] },
-      { h: 'Reembolso', p: ['{?Plazo y método de reembolso conforme a la normativa}.'] },
-      { h: 'Productos defectuosos', p: ['{?Garantía legal y procedimiento ante productos defectuosos}.'] }
+      { h: 'Cómo se gestiona', p: ['Esta web no vende ni envía directamente. Cada compra se hace en Vinted o en Wallapop, y esa plataforma gestiona el pago, el envío y las reclamaciones según sus propias condiciones.'] },
+      { h: 'Envío', p: ['Los costes, plazos y métodos de envío se muestran en el anuncio de cada prenda, antes de comprar.'] },
+      { h: 'Devoluciones y desistimiento', p: ['Las condiciones dependen de la plataforma y de si el vendedor actúa como profesional. {?Política propia de devoluciones y desistimiento, según la normativa aplicable}.'] },
+      { h: 'Incidencias', p: ['Si hay un problema con una prenda, escribe por la mensajería de la plataforma donde la compraste o a {email}.'] }
     ]
   },
   contacto: {
     titulo: 'Contacto',
-    descripcion: 'Datos de contacto y atención al cliente.',
+    descripcion: 'Cómo contactar para consultas sobre prendas, tallas o pedidos.',
     secciones: [
-      { h: 'Escríbenos', p: ['Correo electrónico: {email}.', 'Teléfono: {telefono}.'] },
-      { h: 'Atención', p: ['Horario: {?Horario de atención}.', 'Plazo de respuesta: {?Plazo de respuesta}.'] }
+      { h: 'Consultas sobre una prenda', p: ['Lo más rápido es escribir por la mensajería del anuncio en Vinted ({vinted}) o Wallapop ({wallapop}).'] },
+      { h: 'Otros asuntos', p: ['Correo electrónico: {email}.', 'Teléfono: {telefono}.'] }
     ]
   },
   'aviso-legal': {
@@ -53,43 +51,42 @@ export const INFO = {
     revisionLegal: true,
     secciones: [
       { h: 'Titular del sitio', p: ['Titular: {titular}.', 'NIF: {nif}.', 'Domicilio: {domicilio}.', 'Correo electrónico: {email}.', 'Teléfono: {telefono}.'] },
-      { h: 'Objeto', p: ['Este sitio ({marca}) ofrece packs de regalo para hombres.'] },
+      { h: 'Objeto', p: ['Este sitio ({marca}) es un escaparate de ropa vintage de marca. No procesa ventas: las compras se realizan en Vinted o Wallapop.'] },
+      { h: 'Actividad y obligaciones', p: ['{?Alta censal, IVA y régimen aplicable a la actividad; consultar con una gestoría}.'] },
       { h: 'Propiedad intelectual y responsabilidad', p: ['{?Redacción legal sobre propiedad intelectual, responsabilidad y legislación aplicable}.'] }
     ]
   },
   condiciones: {
-    titulo: 'Condiciones de compra',
-    descripcion: 'Condiciones que regulan la compra de packs en la tienda.',
+    titulo: 'Condiciones de uso y de compra',
+    descripcion: 'Condiciones de uso de la web y funcionamiento de las compras a través de plataformas.',
     revisionLegal: true,
     secciones: [
-      { h: 'Vendedor', p: ['{titular}, NIF {nif}, {domicilio}. Contacto: {email}.'] },
-      { h: 'Productos y precios', p: ['Los precios se muestran en euros con IVA incluido. Los gastos de envío se muestran antes de pagar.'] },
-      { h: 'Proceso de compra y pago', p: ['Añade los packs al carrito, revisa el resumen y finaliza la compra. {?Descripción del pago y de la confirmación del pedido; la pasarela de pago aún no está integrada}.'] },
-      { h: 'Disponibilidad y preventa', p: ['Algunos packs pueden venderse en preventa; la ficha indica la fecha estimada de envío.'] },
-      { h: 'Envío y devoluciones', p: ['Consulta [Envíos](info.html?p=envios) y [Devoluciones y desistimiento](info.html?p=devoluciones).'] },
+      { h: 'Qué es esta web', p: ['Un escaparate con las prendas disponibles. No se puede comprar ni pagar aquí.'] },
+      { h: 'Compra en plataformas', p: ['La compraventa se formaliza en Vinted o Wallapop, bajo sus condiciones. Vinted y Wallapop son servicios de terceros con sus propias políticas de privacidad.'] },
+      { h: 'Precios y disponibilidad', p: ['Los precios de esta web son orientativos: vale el precio del anuncio en el momento de la compra. Cada prenda es única; si aparece como vendida o reservada puede que ya no esté disponible.'] },
+      { h: 'Envíos y devoluciones', p: ['Consulta [Envíos y devoluciones](info.html?p=envios-devoluciones).'] },
       { h: 'Reclamaciones', p: ['{?Hojas de reclamaciones y resolución de conflictos, según normativa aplicable}.'] }
     ]
   },
   privacidad: {
     titulo: 'Política de privacidad',
-    descripcion: 'Cómo se tratan los datos personales en esta tienda.',
+    descripcion: 'Cómo se tratan los datos personales en esta web.',
     revisionLegal: true,
     secciones: [
       { h: 'Responsable', p: ['{titular}, NIF {nif}, {domicilio}. Contacto: {email}.'] },
-      { h: 'Qué datos se tratan', p: ['Actualmente esta web no recoge datos personales: el contenido del carrito se guarda solo en tu navegador.', 'Cuando se active el pedido y el pago se tratarán datos como nombre, dirección de entrega, correo y teléfono. {?Actualizar al integrar el proceso de compra}.'] },
-      { h: 'Finalidad y base legal', p: ['Gestionar pedidos, envíos y atención al cliente (ejecución del contrato) y cumplir obligaciones legales, como las fiscales.'] },
-      { h: 'Destinatarios y conservación', p: ['Destinatarios: {?Transportista, pasarela de pago, asesoría, etc.}.', 'Conservación: {?Plazos de conservación}.'] },
+      { h: 'Qué datos se tratan', p: ['Esta web no tiene registro, formularios ni pagos y no recoge datos personales. {?Actualizar si se añade un formulario de contacto o analítica}.'] },
+      { h: 'Enlaces a otras plataformas', p: ['Al pulsar un enlace a Vinted o Wallapop sales de esta web. Esas plataformas tratan tus datos según sus propias políticas.'] },
       { h: 'Tus derechos', p: ['Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a {email}. También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).'] }
     ]
   },
   cookies: {
     titulo: 'Política de cookies',
-    descripcion: 'Información sobre cookies y almacenamiento local en esta web.',
+    descripcion: 'Información sobre cookies y almacenamiento en esta web.',
     revisionLegal: true,
     secciones: [
-      { h: 'Qué usa esta web hoy', p: ['El código de esta web no instala cookies ni usa servicios de analítica o publicidad.', 'Usa el almacenamiento local de tu navegador (localStorage) solo para recordar el contenido de tu carrito. Es técnico y necesario para esa función.'] },
-      { h: 'Si se añaden cookies no necesarias', p: ['Si se incorporan analítica o publicidad, se pedirá tu consentimiento antes de activarlas y se actualizará esta página. {?Actualizar al añadir analítica o publicidad}.'] },
-      { h: 'Cómo borrar los datos', p: ['Puedes eliminar los datos del sitio desde los ajustes de tu navegador.'] }
+      { h: 'Qué usa esta web hoy', p: ['El código de esta web no instala cookies ni usa servicios de analítica, publicidad o almacenamiento local.'] },
+      { h: 'Enlaces externos', p: ['Vinted y Wallapop pueden usar sus propias cookies cuando las visitas; consulta sus políticas.'] },
+      { h: 'Si se añaden cookies no necesarias', p: ['Si se incorporan analítica o publicidad, se pedirá tu consentimiento antes de activarlas y se actualizará esta página. {?Actualizar al añadir analítica o publicidad}.'] }
     ]
   }
 };

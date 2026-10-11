@@ -1,18 +1,17 @@
 // Páginas informativas y legales: info.html?p=<clave>. Contenido en src/data/info-pages.js.
 import { INFO } from '../data/info-pages.js';
 import { SITE } from '../data/site.config.js';
-import { h, euros } from './ui.js';
+import { h, urlPlataforma } from './ui.js';
 
-const ENLACE_PERMITIDO = /^(info|catalogo|index|carrito)\.html(\?|#|$)/;
+const ENLACE_PERMITIDO = /^(info|catalogo|index|prenda)\.html(\?|#|$)/;
 
 function valores() {
   const e = SITE.empresa;
-  const v = SITE.envio;
   return {
     titular: e.titular, nif: e.nif, domicilio: e.domicilio, email: e.email, telefono: e.telefono,
     marca: SITE.marca.nombre,
-    costeEnvio: typeof v.costeCliente === 'number' ? euros.format(v.costeCliente) : null,
-    plazoPreparacion: v.plazoPreparacion, plazoEntrega: v.plazoEntrega
+    vinted: urlPlataforma('vinted', SITE.plataformas.vinted.perfil),
+    wallapop: urlPlataforma('wallapop', SITE.plataformas.wallapop.perfil)
   };
 }
 
@@ -31,7 +30,9 @@ function texto(cadena) {
     } else {
       const dato = val[m[4]];
       if (!dato) partes.push(h('mark', { class: 'pendiente', text: 'Pendiente de confirmar' }));
-      else partes.push(m[4] === 'email' ? h('a', { href: `mailto:${dato}` }, dato) : dato);
+      else if (m[4] === 'email') partes.push(h('a', { href: `mailto:${dato}` }, dato));
+      else if (m[4] === 'vinted' || m[4] === 'wallapop') partes.push(h('a', { href: dato, target: '_blank', rel: 'noopener noreferrer' }, SITE.plataformas[m[4]].nombre));
+      else partes.push(dato);
     }
   }
   partes.push(cadena.slice(i));

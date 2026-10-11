@@ -1,6 +1,7 @@
-// Validación de datos de productos. main.js avisa por consola si algo no cuadra.
+// Validación de datos de prendas. main.js avisa por consola si algo no cuadra.
+import { PRODUCTS, ESTADOS, DISPONIBILIDADES, CATEGORIAS, CONDICIONES } from '../data/products.js';
 import { SITE } from '../data/site.config.js';
-import { PRODUCTS, ESTADOS, DISPONIBILIDADES } from '../data/products.js';
+import { urlPlataforma } from './ui.js';
 
 export function validarProductos(productos = PRODUCTS) {
   const vistos = new Set();
@@ -12,8 +13,14 @@ export function validarProductos(productos = PRODUCTS) {
     vistos.add(p.slug);
     if (!ESTADOS.includes(p.estado)) errores.push('estado no válido');
     if (!DISPONIBILIDADES.includes(p.disponibilidad)) errores.push('disponibilidad no válida');
-    if (!Array.isArray(p.articulos) || p.articulos.length < 3 || p.articulos.length > 4) errores.push('debe tener 3 o 4 artículos');
-    if (typeof p.precioIva !== 'number' || p.precioIva <= 0 || p.precioIva > SITE.precioMaximoPack) errores.push('precio fuera de rango');
+    if (!CATEGORIAS[p.categoria]) errores.push('categoría no válida');
+    if (!CONDICIONES[p.condicion]) errores.push('condición no válida');
+    if (!p.marca || !p.talla) errores.push('faltan marca o talla');
+    if (p.precio != null && !(typeof p.precio === 'number' && p.precio > 0)) errores.push('precio no válido');
+    for (const clave of Object.keys(SITE.plataformas)) {
+      const url = p.enlaces && p.enlaces[clave];
+      if (url && !urlPlataforma(clave, url)) errores.push(`enlace de ${clave} no válido (debe ser https y de la plataforma)`);
+    }
     return { producto: p, errores };
   });
 }

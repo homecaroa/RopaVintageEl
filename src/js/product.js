@@ -1,107 +1,91 @@
-// Ficha de pack: pack.html?id=<slug>.
-import { PRODUCTS, PERFILES, OCASIONES } from '../data/products.js';
+// Ficha de prenda: prenda.html?id=<slug>. La compra se hace en Vinted/Wallapop.
+import { PRODUCTS, CATEGORIAS, CONDICIONES, MEDIDAS, ETIQUETA_DISPONIBILIDAD } from '../data/products.js';
 import { SITE } from '../data/site.config.js';
-import { anadir, esComprable, MAX_UNIDADES } from './cart.js';
-import { h, euros, imagenPack, tarjetaPack, DISPONIBILIDAD } from './ui.js';
+import { h, imagenPrenda, tarjetaPrenda, botonPlataforma, urlPlataforma, precioTexto } from './ui.js';
 
 const pendiente = (texto = 'Pendiente de confirmar') => h('mark', { class: 'pendiente', text: texto });
 
-function noEncontrado(cont) {
-  document.title = `Pack no encontrado | ${SITE.marca.nombre}`;
+function noEncontrada(cont) {
+  document.title = `Prenda no encontrada | ${SITE.marca.nombre}`;
   cont.replaceChildren(
-    h('h1', { text: 'No hemos encontrado ese pack' }),
-    h('p', { text: 'Puede que haya cambiado de enlace o que ya no esté disponible.' }),
-    h('a', { class: 'btn btn-primario', href: 'catalogo.html' }, 'Ver todos los packs'));
+    h('h1', { text: 'No hemos encontrado esa prenda' }),
+    h('p', { text: 'Puede que haya cambiado de enlace o que ya no esté publicada.' }),
+    h('a', { class: 'btn btn-primario', href: 'catalogo.html' }, 'Ver todas las prendas'));
 }
 
 function migas(p) {
   return h('nav', { 'aria-label': 'Migas de pan' }, h('ol', { class: 'migas' },
     h('li', {}, h('a', { href: 'index.html' }, 'Inicio')),
-    h('li', {}, h('a', { href: 'catalogo.html' }, 'Packs')),
+    h('li', {}, h('a', { href: 'catalogo.html' }, 'Prendas')),
     h('li', { 'aria-current': 'page', text: p.nombre })));
 }
 
-function disponibilidad(p) {
-  if (p.estado === 'agotado' || p.disponibilidad === 'sin-stock') return h('p', { class: 'disp disp-no', text: 'Agotado' });
-  if (p.disponibilidad === 'preventa') {
-    return h('p', { class: 'disp' }, 'Preventa. Envío estimado: ', p.fechaEnvioEstimada || pendiente());
-  }
-  return h('p', { class: 'disp', text: DISPONIBILIDAD[p.disponibilidad] || '' });
+function galeria(p) {
+  const principal = imagenPrenda(p);
+  const imgs = p.imagenes || [];
+  if (imgs.length < 2) return principal;
+  const img = principal.querySelector('img');
+  return h('div', {}, principal, h('div', { class: 'miniaturas' }, imgs.map((src, i) =>
+    h('button', { type: 'button', class: 'mini', 'aria-label': `Ver foto ${i + 1} de ${imgs.length}`, onclick: () => { img.src = src; } },
+      h('img', { src, alt: '', width: 80, height: 100, loading: 'lazy' })))));
 }
 
 function compra(p) {
-  const comprable = esComprable(p);
-  const estado = h('p', { class: 'aviso-ok', role: 'status' });
-  const cantidad = h('input', { id: 'cantidad', name: 'cantidad', type: 'number', min: 1, max: MAX_UNIDADES, value: 1, inputmode: 'numeric', disabled: !comprable });
+  if (p.disponibilidad === 'vendido') {
+    return h('div', {}, h('p', { class: 'disp disp-no', text: 'Vendida' }), h('a', { class: 'btn btn-sec', href: 'catalogo.html' }, 'Ver otras prendas'));
+  }
   return h('div', {},
-    h('form', {
-      class: 'compra',
-      onsubmit: (e) => {
-        e.preventDefault();
-        const n = Math.min(Math.max(parseInt(cantidad.value, 10) || 1, 1), MAX_UNIDADES);
-        const ok = anadir(p.id, n);
-        estado.replaceChildren(...(ok
-          ? ['Añadido al carrito. ', h('a', { href: 'carrito.html' }, 'Ver carrito')]
-          : ['No se ha podido guardar el carrito. Comprueba que el navegador permite guardar datos del sitio.']));
-      }
-    },
-      h('div', { class: 'campo' }, h('label', { for: 'cantidad', text: 'Cantidad' }), cantidad),
-      h('button', { class: 'btn btn-primario', type: 'submit', disabled: !comprable }, comprable ? 'Añadir al carrito' : 'Agotado')),
-    estado);
+    h('p', { class: 'disp', text: ETIQUETA_DISPONIBILIDAD[p.disponibilidad] }),
+    h('div', { class: 'acciones' }, Object.keys(SITE.plataformas).map((k) => botonPlataforma(k, p.enlaces && p.enlaces[k], null, 'btn btn-primario'))),
+    h('p', { class: 'nota', text: 'La compra, el pago y el envío se hacen en la plataforma que elijas, con sus condiciones.' }));
 }
 
 function cabecera(p) {
   return h('div', { class: 'ficha' },
-    imagenPack(p),
+    galeria(p),
     h('div', {},
-      h('p', { class: 'chip', text: PERFILES[p.perfil] || p.perfil }),
+      h('p', { class: 'chip', text: CATEGORIAS[p.categoria] || p.categoria }),
       h('h1', { text: p.nombre }),
-      h('p', { class: 'lead', text: p.resumen }),
-      h('p', { class: 'precio' }, euros.format(p.precioIva), h('small', { text: ' IVA incluido' })),
-      disponibilidad(p),
+      h('p', { class: 'lead', text: `${p.marca} · ${p.epoca} · Talla ${p.talla}` }),
+      h('p', { class: 'precio' }, precioTexto(p), h('small', { text: ' precio orientativo; vale el del anuncio' })),
       compra(p),
-      p.provisional ? h('p', { class: 'badge', text: 'Contenido provisional: se sustituirá por datos y fotos reales' }) : null));
+      p.provisional ? h('p', { class: 'badge', text: 'Ejemplo de demostración: no es una prenda real' }) : null));
 }
 
-function bloque(titulo, ...contenido) {
-  return h('section', { class: 'bloque' }, h('h2', { text: titulo }), ...contenido);
+const bloque = (titulo, ...contenido) => h('section', { class: 'bloque' }, h('h2', { text: titulo }), ...contenido);
+
+function medidas(p) {
+  const filas = Object.entries(p.medidas || {});
+  return bloque('Medidas reales',
+    filas.length
+      ? h('dl', { class: 'medidas' }, filas.map(([k, v]) => h('div', {}, h('dt', { text: MEDIDAS[k] || k }), h('dd', { text: v }))))
+      : h('p', {}, pendiente('Medidas de la prenda')),
+    h('p', { class: 'nota', text: 'Compáralas con una prenda tuya que te quede bien: la talla de la etiqueta puede variar entre épocas y marcas.' }));
 }
 
-function incluye(p) {
-  return bloque(`Qué incluye (${p.articulos.length} artículos)`,
-    h('ul', { class: 'incluye' }, p.articulos.map((a) => h('li', {},
-      h('strong', { text: a.nombre }),
-      a.detalle ? h('span', { class: 'det', text: a.detalle }) : null,
-      a.verificado ? null : h('span', { class: 'badge', text: 'Por confirmar' })))));
+function estado(p) {
+  return bloque('Estado y autenticidad',
+    h('p', {}, h('strong', { text: 'Condición: ' }), CONDICIONES[p.condicion] || ''),
+    h('p', {}, h('strong', { text: 'Detalles y defectos: ' }), p.defectos || pendiente('Detalles y defectos')),
+    h('p', {}, h('strong', { text: 'Marca y etiqueta: ' }), p.etiqueta || pendiente('Etiqueta y autenticidad')));
 }
 
-function envio() {
-  const e = SITE.envio;
-  const fila = (titulo, valor) => h('li', {}, h('strong', { text: `${titulo}: ` }), valor ?? pendiente());
-  return bloque('Envío, plazos y devoluciones',
-    h('ul', { class: 'datos' },
-      fila('Gastos de envío', typeof e.costeCliente === 'number' ? euros.format(e.costeCliente) : null),
-      fila('Preparación', e.plazoPreparacion),
-      fila('Entrega', e.plazoEntrega),
-      fila('Devoluciones', SITE.devoluciones.estado === 'pendiente' ? null : 'Consulta las condiciones')),
-    h('p', {}, h('a', { href: 'info.html?p=envios' }, 'Más sobre envíos'), ' · ', h('a', { href: 'info.html?p=devoluciones' }, 'Devoluciones y desistimiento')));
+function relacionadas(p) {
+  const otras = PRODUCTS.filter((x) => x.id !== p.id && x.estado === 'publicado')
+    .sort((a, b) => (b.categoria === p.categoria) - (a.categoria === p.categoria));
+  if (!otras.length) return null;
+  return bloque('Más prendas', h('div', { class: 'rejilla' }, otras.slice(0, 3).map((x) => tarjetaPrenda(x))));
 }
 
-function relacionados(p) {
-  const otros = PRODUCTS.filter((x) => x.id !== p.id && x.estado !== 'borrador')
-    .sort((a, b) => (b.perfil === p.perfil) - (a.perfil === p.perfil));
-  if (!otros.length) return null;
-  return bloque('Otros packs que pueden gustarte', h('div', { class: 'rejilla' }, otros.slice(0, 3).map(tarjetaPack)));
-}
-
-// Datos estructurados solo cuando el pack ya no es provisional (deben coincidir con lo que ve el usuario).
+// Datos estructurados solo cuando la prenda ya no es de ejemplo (deben coincidir con lo que ve el usuario).
 function jsonLd(p) {
-  const agotado = p.estado === 'agotado' || p.disponibilidad === 'sin-stock';
-  const disp = agotado ? 'OutOfStock' : p.disponibilidad === 'preventa' ? 'PreOrder' : 'InStock';
+  const url = ['vinted', 'wallapop'].map((k) => urlPlataforma(k, p.enlaces && p.enlaces[k])).find(Boolean);
   const datos = {
     '@context': 'https://schema.org', '@type': 'Product', name: p.nombre, description: p.descripcion, sku: p.id,
-    ...(p.imagen ? { image: new URL(p.imagen, location.href).href } : {}),
-    offers: { '@type': 'Offer', priceCurrency: SITE.moneda, price: p.precioIva.toFixed(2), availability: `https://schema.org/${disp}`, url: location.href }
+    brand: { '@type': 'Brand', name: p.marca }, itemCondition: 'https://schema.org/UsedCondition',
+    ...(p.imagenes && p.imagenes[0] ? { image: new URL(p.imagenes[0], location.href).href } : {}),
+    ...(typeof p.precio === 'number' && url ? { offers: { '@type': 'Offer', priceCurrency: SITE.moneda, price: p.precio.toFixed(2), url,
+      availability: p.disponibilidad === 'vendido' ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock' } } : {})
   };
   const script = document.createElement('script');
   script.type = 'application/ld+json';
@@ -110,23 +94,22 @@ function jsonLd(p) {
 }
 
 export function iniciar() {
-  const cont = document.getElementById('pack-contenido');
+  const cont = document.getElementById('prenda-contenido');
   const slug = new URLSearchParams(location.search).get('id');
-  const p = PRODUCTS.find((x) => x.slug === slug && x.estado !== 'borrador');
-  if (!p) return noEncontrado(cont);
+  const p = PRODUCTS.find((x) => x.slug === slug && x.estado === 'publicado');
+  if (!p) return noEncontrada(cont);
 
   document.title = `${(p.seo && p.seo.titulo) || p.nombre} | ${SITE.marca.nombre}`;
-  document.querySelector('meta[name="description"]')?.setAttribute('content', (p.seo && p.seo.descripcion) || p.resumen);
+  document.querySelector('meta[name="description"]')?.setAttribute('content', (p.seo && p.seo.descripcion) || p.descripcion);
 
   cont.replaceChildren(...[
-    migas(p),
-    cabecera(p),
-    bloque('¿Por qué es un buen regalo?', h('p', { text: p.descripcion }), h('p', {}, h('strong', { text: 'Ideal para: ' }), p.paraQuien)),
-    incluye(p),
-    bloque('Presentación', h('p', { text: p.presentacion })),
-    bloque('Ocasiones recomendadas', h('div', { class: 'chips' }, p.ocasiones.map((k) => h('a', { class: 'chip', href: `catalogo.html?ocasion=${encodeURIComponent(k)}`, text: OCASIONES[k] || k })))),
-    envio(),
-    relacionados(p)
+    migas(p), cabecera(p),
+    bloque('Descripción', h('p', { text: p.descripcion })),
+    medidas(p), estado(p),
+    bloque('Compra y envío',
+      h('p', {}, 'Cada compra se formaliza en Vinted o Wallapop, que gestionan el pago, el envío y las reclamaciones. Más información en ',
+        h('a', { href: 'info.html?p=envios-devoluciones' }, 'Envíos y devoluciones'), ' y en ', h('a', { href: 'index.html#como' }, 'Cómo comprar'), '.')),
+    relacionadas(p)
   ].filter(Boolean));
 
   if (!p.provisional) jsonLd(p);

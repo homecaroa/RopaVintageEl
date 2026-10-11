@@ -1,127 +1,74 @@
-// Fuente única de datos de los packs. Todo el contenido es PROVISIONAL (provisional: true)
-// hasta verificar productos, proveedores, precios y fotografías reales.
-export const ESTADOS = ['borrador', 'publicado', 'agotado'];
-export const DISPONIBILIDADES = ['preventa', 'bajo-pedido', 'en-stock', 'sin-stock'];
+// Fuente única de datos de las prendas. Las entradas "Ejemplo" son de DEMOSTRACIÓN (provisional: true):
+// sustitúyelas por prendas reales. Cada prenda enlaza a su anuncio en Vinted y/o Wallapop (enlaces).
+export const ESTADOS = ['borrador', 'publicado'];
+export const DISPONIBILIDADES = ['disponible', 'reservado', 'vendido'];
+export const ETIQUETA_DISPONIBILIDAD = { disponible: 'Disponible', reservado: 'Reservada', vendido: 'Vendida' };
 
-export const PERFILES = {
-  cafetero: 'El cafetero',
-  barbero: 'El barbero',
-  gamer: 'El gamer',
-  aventurero: 'El aventurero',
-  cocinillas: 'El cocinillas',
-  comodin: 'El difícil de regalar'
+export const CATEGORIAS = {
+  'chaquetas-deportivas': 'Chaquetas deportivas',
+  denim: 'Denim y vaqueros',
+  'polos-jerseis': 'Polos, jerséis y sudaderas',
+  workwear: 'Workwear y outdoor',
+  'camisetas-y2k': 'Camisetas gráficas y Y2K'
 };
 
-export const OCASIONES = {
-  cumpleanos: 'Cumpleaños',
-  navidad: 'Navidad',
-  'dia-del-padre': 'Día del Padre',
-  aniversario: 'Aniversario',
-  'amigo-invisible': 'Amigo invisible'
+export const CONDICIONES = {
+  excelente: 'Excelente',
+  'muy-bueno': 'Muy bueno',
+  bueno: 'Bueno',
+  'con-detalles': 'Con detalles (indicados)'
 };
 
-// precioIva = precio final al cliente con IVA incluido (€).
-// costes = null hasta tener presupuestos reales (ver supuestosEconomicos en site.config.js).
+export const MEDIDAS = {
+  pecho: 'Pecho (axila a axila)',
+  hombros: 'Hombros',
+  manga: 'Manga',
+  largo: 'Largo',
+  cintura: 'Cintura',
+  entrepierna: 'Entrepierna'
+};
+
+// precio = importe orientativo en € (el definitivo es el del anuncio). imagenes: rutas en assets/img/.
+// enlaces: URL del anuncio concreto en cada plataforma (null si no está publicado allí).
 export const PRODUCTS = [
   {
-    id: 'pk-cafetero-01',
-    slug: 'pack-cafetero',
-    nombre: 'Pack Cafetero',
-    perfil: 'cafetero',
-    categoria: 'cafe',
-    resumen: 'Para el que no empieza el día sin su café.',
-    descripcion: 'Una taza, café para estrenarla y un accesorio para prepararlo: un regalo que usará mañana mismo.',
-    precioIva: 29.9,
-    articulos: [
-      { nombre: 'Taza de cerámica', detalle: 'Modelo por definir', verificado: false },
-      { nombre: 'Café envasado', detalle: 'Proveedor y formato por definir', verificado: false },
-      { nombre: 'Cuchara medidora o accesorio sencillo', detalle: 'Por definir', verificado: false }
-    ],
-    presentacion: 'Caja de cartón con relleno de papel y tarjeta con mensaje (por definir).',
-    paraQuien: 'Hombres que disfrutan del café en casa o en la oficina.',
-    ocasiones: ['cumpleanos', 'navidad', 'dia-del-padre', 'amigo-invisible'],
-    imagen: null,
-    estado: 'publicado',
-    disponibilidad: 'preventa',
-    fechaEnvioEstimada: null,
-    provisional: true,
-    costes: null,
-    seo: { titulo: 'Pack Cafetero: regalo para hombre cafetero', descripcion: 'Caja de regalo para hombres que disfrutan del café: taza, café y accesorio. Elige y regala sin complicarte.' }
+    id: 'ej-chaqueta-01', slug: 'ejemplo-chaqueta-deportiva', nombre: 'Ejemplo: chaqueta deportiva años 90',
+    marca: 'Marca de ejemplo', categoria: 'chaquetas-deportivas', epoca: '90s', talla: 'L',
+    medidas: { pecho: '58 cm', manga: '64 cm', largo: '70 cm' },
+    condicion: 'muy-bueno', defectos: 'Ejemplo: sin defectos visibles.', etiqueta: 'Ejemplo: etiqueta original visible.',
+    descripcion: 'Descripción de ejemplo para ver cómo se presenta una prenda. Sustituir por la descripción real.',
+    precio: 35, imagenes: [], enlaces: { vinted: null, wallapop: null },
+    estado: 'publicado', disponibilidad: 'disponible', fecha: '2026-10-10', provisional: true,
+    seo: { titulo: 'Chaqueta deportiva vintage años 90', descripcion: 'Chaqueta deportiva vintage de los años 90 con medidas reales y estado explicado.' }
   },
   {
-    id: 'pk-barbero-01',
-    slug: 'pack-barbero',
-    nombre: 'Pack Barbero',
-    perfil: 'barbero',
-    categoria: 'cuidado-personal',
-    resumen: 'Cuidado personal básico, ordenado y listo para regalar.',
-    descripcion: 'Neceser, peine, paño y un producto de cuidado para quien se toma en serio su rutina.',
-    precioIva: 34.9,
-    articulos: [
-      { nombre: 'Neceser', detalle: 'Modelo por definir', verificado: false },
-      { nombre: 'Peine o accesorio de afeitado', detalle: 'Por definir', verificado: false },
-      { nombre: 'Paño', detalle: 'Por definir', verificado: false },
-      { nombre: 'Producto cosmético', detalle: 'Proveedor trazable y etiquetado por revisar', verificado: false }
-    ],
-    presentacion: 'Caja de cartón con relleno de papel y tarjeta con mensaje (por definir).',
-    paraQuien: 'Hombres que cuidan barba, pelo o afeitado.',
-    ocasiones: ['cumpleanos', 'navidad', 'dia-del-padre', 'aniversario'],
-    imagen: null,
-    estado: 'publicado',
-    disponibilidad: 'preventa',
-    fechaEnvioEstimada: null,
-    provisional: true,
-    costes: null,
-    seo: { titulo: 'Pack Barbero: regalo de cuidado personal para hombre', descripcion: 'Caja de regalo para hombres con neceser, accesorio, paño y producto de cuidado. Regalo listo para entregar.' }
+    id: 'ej-vaqueros-01', slug: 'ejemplo-vaqueros', nombre: 'Ejemplo: vaqueros clásicos',
+    marca: 'Marca de ejemplo', categoria: 'denim', epoca: '90s', talla: '32/32',
+    medidas: { cintura: '40 cm', entrepierna: '80 cm', largo: '102 cm' },
+    condicion: 'bueno', defectos: 'Ejemplo: ligero desgaste en los bajos.', etiqueta: 'Ejemplo: etiqueta interior legible.',
+    descripcion: 'Descripción de ejemplo para ver cómo se presenta una prenda. Sustituir por la descripción real.',
+    precio: 32, imagenes: [], enlaces: { vinted: null, wallapop: null },
+    estado: 'publicado', disponibilidad: 'disponible', fecha: '2026-10-09', provisional: true,
+    seo: { titulo: 'Vaqueros vintage clásicos', descripcion: 'Vaqueros vintage con medidas reales y estado explicado.' }
   },
   {
-    id: 'pk-comodin-01',
-    slug: 'pack-comodin',
-    nombre: 'Pack Comodín',
-    perfil: 'comodin',
-    categoria: 'versatil',
-    resumen: 'Para el hombre al que nunca sabes qué regalar.',
-    descripcion: 'Tres detalles útiles que funcionan casi siempre: para amigo invisible, compañeros o cuando falta tiempo.',
-    precioIva: 24.9,
-    articulos: [
-      { nombre: 'Libreta', detalle: 'Por definir', verificado: false },
-      { nombre: 'Taza o botella', detalle: 'Por definir', verificado: false },
-      { nombre: 'Snack envasado', detalle: 'Proveedor y alérgenos por revisar', verificado: false }
-    ],
-    presentacion: 'Caja de cartón con relleno de papel y tarjeta con mensaje (por definir).',
-    paraQuien: 'Hombres de gustos poco claros: compañeros, amigos, familiares lejanos.',
-    ocasiones: ['cumpleanos', 'navidad', 'amigo-invisible'],
-    imagen: null,
-    estado: 'publicado',
-    disponibilidad: 'preventa',
-    fechaEnvioEstimada: null,
-    provisional: true,
-    costes: null,
-    seo: { titulo: 'Pack Comodín: regalo para hombre difícil de regalar', descripcion: 'Caja de regalo versátil para hombres a los que cuesta regalar. Ideal para amigo invisible y cumpleaños.' }
+    id: 'ej-sudadera-01', slug: 'ejemplo-sudadera', nombre: 'Ejemplo: sudadera de marca',
+    marca: 'Marca de ejemplo', categoria: 'polos-jerseis', epoca: '2000s', talla: 'M',
+    medidas: { pecho: '54 cm', manga: '62 cm', largo: '66 cm' },
+    condicion: 'con-detalles', defectos: 'Ejemplo: pequeño desgaste en puños.', etiqueta: 'Ejemplo: etiqueta bordada.',
+    descripcion: 'Descripción de ejemplo para ver cómo se presenta una prenda. Sustituir por la descripción real.',
+    precio: 24, imagenes: [], enlaces: { vinted: null, wallapop: null },
+    estado: 'publicado', disponibilidad: 'reservado', fecha: '2026-10-08', provisional: true,
+    seo: { titulo: 'Sudadera vintage de marca', descripcion: 'Sudadera vintage de marca con medidas reales y estado explicado.' }
   },
   {
-    id: 'pk-escapada-01',
-    slug: 'pack-escapada',
-    nombre: 'Pack Escapada',
-    perfil: 'aventurero',
-    categoria: 'aire-libre',
-    resumen: 'Para el de las escapadas de fin de semana.',
-    descripcion: 'Botella, libreta y un organizador para llevar lo justo. Borrador: pendiente de decidir si se lanza.',
-    precioIva: 29.9,
-    articulos: [
-      { nombre: 'Botella o taza de viaje', detalle: 'Por definir', verificado: false },
-      { nombre: 'Libreta', detalle: 'Por definir', verificado: false },
-      { nombre: 'Accesorio organizador', detalle: 'Por definir', verificado: false }
-    ],
-    presentacion: 'Por definir.',
-    paraQuien: 'Hombres aficionados a escapadas y actividades al aire libre.',
-    ocasiones: ['cumpleanos', 'navidad'],
-    imagen: null,
-    estado: 'borrador',
-    disponibilidad: 'sin-stock',
-    fechaEnvioEstimada: null,
-    provisional: true,
-    costes: null,
-    seo: { titulo: 'Pack Escapada: regalo para hombre aventurero', descripcion: 'Caja de regalo para hombres que viven de escapada en escapada.' }
+    id: 'ej-camiseta-01', slug: 'ejemplo-camiseta-y2k', nombre: 'Ejemplo: camiseta gráfica Y2K',
+    marca: 'Marca de ejemplo', categoria: 'camisetas-y2k', epoca: '2000s', talla: 'L',
+    medidas: { pecho: '56 cm', largo: '72 cm' },
+    condicion: 'muy-bueno', defectos: 'Ejemplo: estampado sin grietas.', etiqueta: null,
+    descripcion: 'Ejemplo de prenda ya vendida, para ver cómo se muestra ese estado.',
+    precio: 22, imagenes: [], enlaces: { vinted: null, wallapop: null },
+    estado: 'publicado', disponibilidad: 'vendido', fecha: '2026-10-01', provisional: true,
+    seo: { titulo: 'Camiseta gráfica Y2K vintage', descripcion: 'Camiseta gráfica vintage de principios de los 2000.' }
   }
 ];

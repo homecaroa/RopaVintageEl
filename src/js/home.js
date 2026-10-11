@@ -1,22 +1,24 @@
-// Página de inicio: packs destacados y acceso por perfil, a partir de products.js.
-import { PRODUCTS, PERFILES } from '../data/products.js';
-import { h, tarjetaPack } from './ui.js';
+// Portada: últimas prendas, categorías con prendas y botones a los perfiles de Vinted/Wallapop.
+import { PRODUCTS, CATEGORIAS } from '../data/products.js';
+import { SITE } from '../data/site.config.js';
+import { h, tarjetaPrenda, ordenarPrendas, botonPlataforma } from './ui.js';
 
 export function iniciar() {
-  const visibles = PRODUCTS.filter((p) => p.estado !== 'borrador');
+  const visibles = PRODUCTS.filter((p) => p.estado === 'publicado');
 
-  const rejilla = document.getElementById('packs-destacados');
-  rejilla.replaceChildren(...(visibles.length
-    ? visibles.slice(0, 3).map(tarjetaPack)
-    : [h('p', { class: 'vacio', text: 'Todavía no hay packs publicados. Vuelve pronto.' })]));
+  const rejilla = document.getElementById('prendas-destacadas');
+  const ultimas = ordenarPrendas(visibles, 'recientes').slice(0, 4);
+  rejilla.replaceChildren(...(ultimas.length
+    ? ultimas.map((p) => tarjetaPrenda(p))
+    : [h('p', { class: 'vacio', text: 'Todavía no hay prendas publicadas. Vuelve pronto.' })]));
 
-  const lista = document.getElementById('perfiles-lista');
-  const perfiles = [...new Set(visibles.map((p) => p.perfil))];
-  lista.replaceChildren(...(perfiles.length
-    ? perfiles.map((clave) => {
-        const n = visibles.filter((p) => p.perfil === clave).length;
-        return h('a', { class: 'perfil', href: `catalogo.html?perfil=${encodeURIComponent(clave)}` },
-          h('strong', { text: PERFILES[clave] || clave }), h('span', { text: `${n} ${n === 1 ? 'pack' : 'packs'}` }));
-      })
-    : [h('p', { class: 'vacio', text: 'Los perfiles aparecerán cuando haya packs publicados.' })]));
+  const lista = document.getElementById('categorias-lista');
+  const cats = Object.entries(CATEGORIAS).map(([k, texto]) => [k, texto, visibles.filter((p) => p.categoria === k).length]).filter((x) => x[2] > 0);
+  lista.replaceChildren(...(cats.length
+    ? cats.map(([k, texto, n]) => h('a', { class: 'perfil', href: `catalogo.html?categoria=${encodeURIComponent(k)}` },
+        h('strong', { text: texto }), h('span', { text: `${n} ${n === 1 ? 'prenda' : 'prendas'}` })))
+    : [h('p', { class: 'vacio', text: 'Las categorías aparecerán cuando haya prendas publicadas.' })]));
+
+  document.getElementById('plataformas-botones')?.replaceChildren(
+    ...Object.entries(SITE.plataformas).map(([clave, pl]) => botonPlataforma(clave, pl.perfil, `Mi perfil en ${pl.nombre}`, 'btn btn-primario')));
 }

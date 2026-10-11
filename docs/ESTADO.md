@@ -1,60 +1,55 @@
-# ESTADO DEL PROYECTO · Acierto (marca provisional)
+# ESTADO DEL PROYECTO · Archivo Vintage (nombre provisional)
 
-Última actualización: Lote 06 (info, legales, SEO base) · 8 oct 2026
+Última actualización: Cambio de proyecto a ropa vintage · 10 oct 2026
 
-## Objetivo
-Construir la web de una tienda de packs de regalo para hombres (3–4 artículos por caja), España, español de España. Foco actual: solo la página (no ventas, marketing, proveedores ni precios). El usuario aportará la información de cada lote de productos poco a poco. Precio máximo por pack: 49,90 €.
+## Cambio de rumbo
+El proyecto ya no es una tienda de regalos. Ahora es un **escaparate de ropa vintage de marca** (España y Europa; adultos de 25–40) que redirige a los perfiles del usuario en **Vinted y Wallapop**. Se mantiene la estructura de la web anterior. Se eliminaron carrito, "Encuentra tu regalo", packs y pagos. Fuente de contexto: estudio de mercado y plan de negocio de ropa vintage (proyecto).
+Principio del estudio: validar en marketplaces antes de una tienda propia; la web no cobra ni gestiona pedidos.
 
-## Arquitectura y tecnologías
-- HTML/CSS/JS vanilla con módulos ES6, sin build ni dependencias. GitHub Pages (repo público), rutas relativas.
-- Datos en `src/data/products.js` y `src/data/site.config.js`.
-- Cada página: `<body data-page="...">` + `src/js/main.js` (cabecera, pie, validación) + módulo `src/js/<pagina>.js` con `iniciar()`, registrado en `PAGINAS` de main.js.
-- Carrito en localStorage (clave `acierto-carrito`, líneas {id, cantidad}, máx. 10 por pack); precios siempre leídos de products.js; importes calculados en céntimos.
-- Pago real NO integrado: botón "Finalizar compra" desactivado y señalizado. Pagos sin autorizar.
-- Paleta (base clara cálida): papel #F7F3EA, texto #17233B; azul navy #1E3153 (estructura, pie), verde loden #56643A (apoyo, chips), rojo burdeos #7A1F2E (acciones y detalles). Cada color tiene variante clara (-claro) para fondos. Variables en `src/css/base.css`. Fuentes del sistema.
+## Reglas de trabajo
+- Entregar solo los archivos que cambian en cada lote.
+- Tener presente la lista de pendientes: si algo depende del usuario, pasar a lo siguiente y recordárselo después.
+- Lotes pequeños; no planificar funciones que aún no hacen falta.
 
-## Árbol actual
-README.md · .gitignore · robots.txt · index.html · catalogo.html · pack.html · carrito.html · info.html · assets/favicon.svg · docs/ESTADO.md
-herramientas/sitemap.html (generador interno de sitemap.xml)
+## Arquitectura
+- HTML/CSS/JS vanilla con módulos ES6, sin build; GitHub Pages; rutas relativas.
+- Datos: `src/data/products.js` (prendas), `site.config.js` (marca, empresa, perfiles de plataformas), `info-pages.js` (textos).
+- Páginas: `<body data-page>` + `main.js` + módulo `src/js/<pagina>.js` con `iniciar()`.
+- Enlaces externos: solo https a vinted.* o wallapop.com (validados en `ui.js`); se abren con `rel="noopener noreferrer"`. Sin cookies, sin almacenamiento local, sin analítica.
+- Paleta: navy #1E3153, loden #56643A, burdeos #7A1F2E sobre base clara #F7F3EA.
+
+## Archivos
+README.md · .gitignore · robots.txt · index.html · catalogo.html · prenda.html · info.html · assets/favicon.svg · docs/ESTADO.md · herramientas/sitemap.html
 src/css/base.css · components.css · paginas.css
 src/data/site.config.js · products.js · info-pages.js
-src/js/main.js · ui.js · layout.js · cart.js · home.js · catalog.js · product.js · carrito.js · info.js · seo.js · validar.js
-Previstos: herramientas/margenes.html (calculadora de márgenes), prerenderizado de fichas (opcional)
+src/js/main.js · ui.js · layout.js · home.js · catalog.js · product.js · info.js · seo.js · validar.js
+Eliminados del proyecto anterior (borrar en GitHub si siguen): carrito.html, encuentra.html, pack.html, src/js/cart.js, src/js/carrito.js, src/js/encuentra.js.
 
-## Registro de archivos
-| Ruta | Estado | Versión |
-|---|---|---|
-| README.md, .gitignore, assets/favicon.svg, src/data/site.config.js, src/data/products.js | entregado | L01 |
-| src/css/base.css, components.css, src/js/ui.js, validar.js, home.js, index.html | entregado | L02-L03 |
-| catalogo.html, pack.html, carrito.html, src/css/paginas.css, src/js/catalog.js, product.js, carrito.js | entregado | L04-L05 |
-| src/js/cart.js, layout.js, main.js | entregado (sustituyen versiones previas) | L04-L05 |
-| src/css/base.css, components.css, assets/favicon.svg (nueva paleta) | entregado | Paleta v2 |
-| info.html, robots.txt, herramientas/sitemap.html, src/data/info-pages.js, src/js/info.js, seo.js, main.js, src/css/paginas.css, docs/ESTADO.md | entregado | L06 |
-Ninguno marcado como subido ni verificado hasta que el usuario lo confirme.
+## Qué hay
+- Portada: propuesta de valor, últimas prendas, categorías con prendas, cómo comprar, ventajas, botones a tus perfiles, FAQ.
+- Catálogo: filtros por categoría, marca y talla; orden por recientes/precio; vendidas al final; URL compartible.
+- Ficha: galería, marca/época/talla, precio orientativo, botones «Ver en Vinted/Wallapop» (enlace al anuncio de esa prenda), medidas reales, estado y autenticidad, prendas relacionadas, JSON-LD solo cuando la prenda deja de ser ejemplo.
+- Info: FAQ, Quiénes somos, Envíos y devoluciones, Contacto, Aviso legal, Condiciones, Privacidad, Cookies (textos orientativos con datos pendientes resaltados).
+- Categorías (del estudio): chaquetas deportivas, denim, polos/jerséis/sudaderas, workwear y outdoor, camisetas gráficas y Y2K.
 
-## Funcionalidades implementadas
-Inicio completo; catálogo con filtros por perfil/ocasión, orden y URL compartible; ficha con contenido, disponibilidad, cantidad, añadir al carrito, envío/devoluciones pendientes marcados, ocasiones y relacionados; carrito editable con subtotal, envío pendiente y total; contador en cabecera en vivo; estados vacíos, agotado y pack no encontrado; JSON-LD de producto solo si `provisional: false`.
+## Pendiente de ti
+- U1 URLs de tus perfiles de Vinted y Wallapop → `site.config.js` (`plataformas`). Mientras estén vacías, los botones aparecen como "enlace pendiente".
+- U2 Nombre definitivo de la marca y dominio.
+- U3 Primeras prendas reales: fotos propias (en `assets/img/`), marca, talla, medidas, estado, defectos, precio y URL del anuncio. Las 4 prendas "Ejemplo" son de demostración y hay que borrarlas.
+- U4 Datos de titular (nombre, NIF, domicilio, correo): `site.config.js`.
+- U5 Gestoría: alta censal, RETA, IVA y régimen de bienes usados (el estudio lo marca como paso previo a comprar lotes de forma sistemática) y revisión de los textos legales.
+- U6 Texto de "Quiénes somos" (historia y propósito) y política de autenticidad.
 
-## Lote 06 (entregado)
-info.html?p=faq|envios|devoluciones|contacto|aviso-legal|condiciones|privacidad|cookies (contenido en src/data/info-pages.js; marcadores {dato} se rellenan desde site.config.js, {?texto} = pendiente de decidir). Textos legales orientativos con aviso visible: revisar con profesional. seo.js: Open Graph y canonical (solo si SITE.dominio está definido). herramientas/sitemap.html genera sitemap.xml cuando hay dominio. robots.txt solo surte efecto con dominio propio en la raíz.
+## Lo que puedo hacer sin ti (próximos lotes)
+- L2 Plantilla de hoja de cálculo para el registro del estudio (compra, coste por prenda vendible, precio final, rotación, rentabilidad por hora) y, si se quiere, una calculadora en `herramientas/`.
+- L3 Optimizaciones SEO: descripciones meta más largas, Organization/BreadcrumbList, URLs limpias por prerenderizado.
+- L4 Mejoras de ficha: más fotos, guía de tallas, enlace "Compartir".
 
-## Pendientes
-Datos reales de packs del usuario; datos de empresa, envío y devoluciones en site.config.js; generar sitemap.xml y quitar `noindex` al lanzar; calculadora de márgenes y revisión final (L07); pasarela de pago (sin autorizar).
-
-## Decisiones técnicas
-- Ficha: `pack.html?id=<slug>`; catálogo: `?perfil=&ocasion=&orden=`.
-- Un pack `borrador` no aparece en catálogo, inicio ni ficha. Es comprable solo si estado `publicado` y disponibilidad ≠ `sin-stock`.
-- Para añadir/cambiar packs solo se edita `src/data/products.js`.
-
-## Errores conocidos
-Ninguno detectado. Las FAQ de la portada (HTML) y de info.html (datos) están duplicadas: si se editan, cambiar ambas.
+## Fuera de la web
+Compras a proveedores, fotografía, publicación de anuncios, gestión de pedidos, envíos, devoluciones y facturación se hacen en Vinted/Wallapop y con la gestoría. Una tienda propia solo cuando haya ventas repetidas, márgenes demostrados y capacidad de captar clientes (criterio del estudio).
 
 ## Pruebas realizadas
-- Node + jsdom: catálogo (filtros, orden, URL, vacío), ficha (contenido, añadir al carrito, contador, pack borrador → no encontrado), carrito (cantidades, totales, quitar, no disponibles, pago desactivado), 0 errores de consola; sintaxis de todos los módulos.
-- Chromium (Playwright) en local: inicio (escritorio y móvil), catálogo, ficha, carrito y las 8 páginas de info (más clave inexistente) renderizan sin errores de consola; canonical y sitemap probados con dominio simulado; sitemap sin dominio muestra aviso. No probado en GitHub Pages.
+Chromium local (Playwright), 13 vistas: 1 H1 por página, sin saltos de encabezado, 0 errores de consola, 18 enlaces internos sin roturas. Filtros y orden del catálogo, ficha, estado "vendida", validación de URLs (https válida aceptada; http o dominio ajeno rechazados), enlaces externos con `target=_blank` y `rel=noopener noreferrer`. No probado en GitHub Pages ni en dispositivos reales.
 
 ## Próxima tarea exacta
-Lote 07: revisión final (accesibilidad, enlaces, datos reales) y checklist de lanzamiento. Antes, el usuario aporta los datos del primer lote de productos y los datos de empresa/envío.
-
-## Cómo continuar sin rehacer trabajo
-Nueva conversación: pegar este archivo, products.js, site.config.js y main.js, e indicar el lote.
+Esperar U1 y U3 para cargar tus perfiles y primeras prendas. Mientras, L2 (hoja de cálculo de seguimiento).

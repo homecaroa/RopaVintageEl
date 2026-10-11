@@ -22,7 +22,7 @@ export function aplicarSeo() {
   if (!SITE.dominio) return;
   const base = SITE.dominio.replace(/\/$/, '');
   const archivo = location.pathname.split('/').pop() || 'index.html';
-  const claves = { 'pack.html': ['id'], 'info.html': ['p'] }[archivo] || [];
+  const claves = { 'prenda.html': ['id'], 'info.html': ['p'] }[archivo] || [];
   const params = new URLSearchParams(location.search);
   const q = new URLSearchParams();
   for (const k of claves) if (params.has(k)) q.set(k, params.get(k));

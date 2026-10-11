@@ -1,15 +1,9 @@
-// Utilidades compartidas: creación segura de DOM, formato de precios y tarjeta de pack.
-import { PERFILES } from '../data/products.js';
+// Utilidades compartidas: DOM seguro, formato de precios, enlaces a plataformas, ordenación y tarjeta de prenda.
+import { CATEGORIAS, CONDICIONES, ETIQUETA_DISPONIBILIDAD } from '../data/products.js';
 import { SITE } from '../data/site.config.js';
 
 export const euros = new Intl.NumberFormat(SITE.idioma, { style: 'currency', currency: SITE.moneda });
-
-export const DISPONIBILIDAD = {
-  preventa: 'Preventa',
-  'bajo-pedido': 'Bajo pedido',
-  'en-stock': 'En stock',
-  'sin-stock': 'Sin stock'
-};
+export const precioTexto = (p) => (typeof p.precio === 'number' ? euros.format(p.precio) : 'Consultar');
 
 export function h(tag, props = {}, ...hijos) {
   const nodo = document.createElement(tag);
@@ -24,38 +18,63 @@ export function h(tag, props = {}, ...hijos) {
   return nodo;
 }
 
-const CAJA_SVG =
-  '<svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">' +
-  '<rect x="14" y="14" width="92" height="62" rx="6" fill="none" stroke="currentColor" stroke-width="3"/>' +
-  '<path d="M14 38h92M60 14v62" stroke="currentColor" stroke-width="3"/>' +
-  '<circle cx="37" cy="26" r="6" fill="currentColor"/>' +
-  '<rect x="72" y="46" width="26" height="20" rx="3" fill="currentColor" opacity=".35"/></svg>';
+// Solo se aceptan enlaces https a Vinted o Wallapop.
+const HOSTS = {
+  vinted: /^https:\/\/([a-z0-9-]+\.)*vinted\.[a-z]{2,}(\/|$)/i,
+  wallapop: /^https:\/\/([a-z0-9-]+\.)*wallapop\.com(\/|$)/i
+};
+export function urlPlataforma(clave, url) {
+  return typeof url === 'string' && HOSTS[clave] && HOSTS[clave].test(url) ? url : null;
+}
 
-export function imagenPack(p) {
+export function botonPlataforma(clave, url, texto, clase = 'btn btn-sec') {
+  const ok = urlPlataforma(clave, url);
+  const nombre = SITE.plataformas[clave].nombre;
+  if (!ok) return h('span', { class: 'btn btn-pendiente', 'aria-disabled': 'true', text: `${nombre}: enlace pendiente` });
+  return h('a', { class: clase, href: ok, target: '_blank', rel: 'noopener noreferrer' },
+    texto || `Ver en ${nombre}`, h('span', { class: 'sr-only', text: ' (se abre en una pestaña nueva)' }));
+}
+
+// Vendidas al final; después, según el modo.
+export function ordenarPrendas(lista, modo = 'recientes') {
+  const vendida = (p) => (p.disponibilidad === 'vendido' ? 1 : 0);
+  const precio = (p, vacio) => (typeof p.precio === 'number' ? p.precio : vacio);
+  const comparar = {
+    recientes: (a, b) => String(b.fecha || '').localeCompare(String(a.fecha || '')),
+    'precio-asc': (a, b) => precio(a, Infinity) - precio(b, Infinity),
+    'precio-desc': (a, b) => precio(b, -Infinity) - precio(a, -Infinity)
+  }[modo] || (() => 0);
+  return [...lista].sort((a, b) => vendida(a) - vendida(b) || comparar(a, b));
+}
+
+const PRENDA_SVG =
+  '<svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">' +
+  '<path d="M42 12 L54 8 Q60 18 66 8 L78 12 L100 30 L90 42 L80 34 L80 80 L40 80 L40 34 L30 42 L20 30 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>';
+
+export function imagenPrenda(p) {
   const marco = h('div', { class: 'media' });
-  if (p.imagen) {
-    marco.append(h('img', { src: p.imagen, alt: `${p.nombre}: caja de regalo con ${p.articulos.length} artículos`, loading: 'lazy', width: 600, height: 450 }));
+  if (p.imagenes && p.imagenes.length) {
+    marco.append(h('img', { src: p.imagenes[0], alt: `${p.nombre}, ${p.marca}, talla ${p.talla}`, loading: 'lazy', width: 600, height: 750 }));
   } else {
     const ph = h('div', { class: 'media-ph', role: 'img', 'aria-label': `Imagen provisional de ${p.nombre}` });
-    ph.innerHTML = CAJA_SVG; // constante estática, sin datos externos
+    ph.innerHTML = PRENDA_SVG; // constante estática
     ph.append(h('span', { text: 'Imagen provisional' }));
     marco.append(ph);
   }
   return marco;
 }
 
-export function tarjetaPack(p) {
-  const agotado = p.estado === 'agotado';
-  const disp = agotado ? 'Agotado' : DISPONIBILIDAD[p.disponibilidad] || '';
-  return h('article', { class: 'card' + (agotado ? ' card-agotado' : '') },
-    imagenPack(p),
+export function tarjetaPrenda(p, { nivel = 3 } = {}) {
+  const vendida = p.disponibilidad === 'vendido';
+  const etiqueta = p.disponibilidad !== 'disponible' ? ETIQUETA_DISPONIBILIDAD[p.disponibilidad] : null;
+  return h('article', { class: 'card' + (vendida ? ' card-agotado' : '') },
+    imagenPrenda(p),
     h('div', { class: 'card-body' },
-      h('p', { class: 'chip', text: PERFILES[p.perfil] || p.perfil }),
-      h('h3', {}, h('a', { href: `pack.html?id=${encodeURIComponent(p.slug)}` }, p.nombre)),
-      h('p', { class: 'card-resumen', text: p.resumen }),
-      h('p', { class: 'card-meta', text: `${p.articulos.length} artículos${disp ? ' · ' + disp : ''}` }),
-      h('p', { class: 'precio' }, euros.format(p.precioIva), h('small', { text: ' IVA incl.' })),
-      p.provisional ? h('p', { class: 'badge', text: 'Contenido provisional' }) : null
-    )
-  );
+      h('p', { class: 'chip', text: CATEGORIAS[p.categoria] || p.categoria }),
+      h(`h${nivel}`, {}, h('a', { href: `prenda.html?id=${encodeURIComponent(p.slug)}` }, p.nombre)),
+      h('p', { class: 'card-resumen', text: `${p.marca} · Talla ${p.talla}` }),
+      h('p', { class: 'card-meta', text: `${CONDICIONES[p.condicion] || ''} · ${p.epoca}` }),
+      h('p', { class: 'precio', text: precioTexto(p) }),
+      etiqueta ? h('p', { class: 'badge badge-estado', text: etiqueta }) : null,
+      p.provisional ? h('p', { class: 'badge', text: 'Ejemplo de demostración' }) : null));
 }
