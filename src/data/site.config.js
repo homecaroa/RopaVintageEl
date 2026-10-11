@@ -9,7 +9,8 @@ export const SITE = {
   marca: {
     nombre: 'Caroa Vintage',
     esProvisional: false, // nombre decidido; falta comprobar dominio y registro de marca
-    logo: 'assets/logo-caroa.png',
+    logo: 'assets/logo-512.png', // para datos estructurados (cuadrado, fondo sólido)
+    logoCabecera: 'assets/logo-cabecera.png',
     ogImagen: 'assets/og-caroa.png',
     eslogan: 'Ropa vintage de marca para hombre, elegida prenda a prenda.',
     descripcion: 'Ropa vintage de marca para hombre de los 80, 90 y 2000, elegida prenda a prenda, con fotos propias, medidas reales y el estado explicado.'

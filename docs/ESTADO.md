@@ -3,7 +3,7 @@
 Última actualización: Marca Caroa Vintage, logo y SEO inicial · 11 oct 2026
 
 ## Cambio de rumbo
-El proyecto ya no es una tienda de regalos. Ahora es un **escaparate de ropa vintage de marca** (España y Europa; adultos de 25–40) que redirige a los perfiles del usuario en **Vinted y Wallapop**. Marca: **Caroa Vintage** (logo: daga estilo tatuaje tradicional con la cinta CAROA). Titular: Caroa, particular por ahora. Se mantiene la estructura de la web anterior. Se eliminaron carrito, "Encuentra tu regalo", packs y pagos. Fuente de contexto: estudio de mercado y plan de negocio de ropa vintage (proyecto).
+El proyecto ya no es una tienda de regalos. Ahora es un **escaparate de ropa vintage de marca** (España y Europa; adultos de 25–40) que redirige a los perfiles del usuario en **Vinted y Wallapop**. Marca: **Caroa Vintage** (logo: daga minimalista crema sobre negro con el texto CAROA; versiones en `assets/`: logo-caroa.png para fondos oscuros, logo-cabecera.png para la cabecera, logo-512.png, favicon y og-caroa.png). Titular: Caroa, particular por ahora. Se mantiene la estructura de la web anterior. Se eliminaron carrito, "Encuentra tu regalo", packs y pagos. Fuente de contexto: estudio de mercado y plan de negocio de ropa vintage (proyecto).
 Principio del estudio: validar en marketplaces antes de una tienda propia; la web no cobra ni gestiona pedidos.
 
 ## Reglas de trabajo

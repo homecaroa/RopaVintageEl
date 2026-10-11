@@ -34,7 +34,7 @@
 @media (min-width: 800px) { .hero-grid { grid-template-columns: 1.1fr .9fr; } }
 .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; font-weight: 700; color: var(--loden); margin-bottom: .75rem; }
 .lead { font-size: 1.15rem; max-width: 34rem; }
-.hero-visual { background: var(--loden-claro); border: 1px solid #cfd6b6; border-radius: var(--radio); padding: 1.5rem; text-align: center; }
+.hero-visual { background: var(--navy-h); border-radius: var(--radio); padding: 2rem 1.5rem; text-align: center; }
 .hero-visual small { display: block; margin-top: .5rem; opacity: .75; }
 .h-caja { fill: var(--blanco); stroke: var(--navy); stroke-width: 3; }
 .h-linea { stroke: var(--navy); stroke-width: 3; fill: none; }

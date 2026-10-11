@@ -38,7 +38,7 @@ export function montarCabecera(pagina) {
   const perfiles = perfilesExternos();
   cont.replaceChildren(h('div', { class: 'wrap bar' },
     h('a', { class: 'logo', href: 'index.html', 'aria-label': `${SITE.marca.nombre}, inicio` },
-      h('img', { src: SITE.marca.logo, alt: '', width: 34, height: 48 }), h('span', { text: SITE.marca.nombre })),
+      h('img', { src: SITE.marca.logoCabecera, alt: '', width: 45, height: 112 }), h('span', { text: SITE.marca.nombre })),
     menu,
     perfiles.length ? h('div', { class: 'cab-enlaces' }, perfiles.map((x) => externo(x.nombre, x.url))) : null,
     boton));
