@@ -6,7 +6,7 @@
 export const INFO = {
   faq: {
     titulo: 'Preguntas frecuentes',
-    descripcion: 'Respuestas a las dudas habituales sobre cómo comprar, tallas, autenticidad, envíos y devoluciones.',
+    descripcion: 'Preguntas frecuentes sobre cómo comprar ropa vintage de marca en Vinted y Wallapop, tallas y medidas, autenticidad, envíos y devoluciones en Caroa Vintage.',
     secciones: [
       { h: '¿Cómo compro una prenda?', p: ['Entra en la ficha de la prenda y pulsa «Ver en Vinted» o «Ver en Wallapop». La compra, el pago y el envío se hacen en esa plataforma.'] },
       { h: '¿Se paga o se piden datos en esta web?', p: ['No. Esta web es un escaparate: no procesa pagos ni pedidos y no guarda datos de compra.'] },
@@ -18,9 +18,9 @@ export const INFO = {
   },
   'quienes-somos': {
     titulo: 'Quiénes somos',
-    descripcion: 'Qué es este proyecto de ropa vintage de marca y cómo seleccionamos cada prenda.',
+    descripcion: 'Conoce Caroa Vintage: selección de ropa vintage de marca para hombre de los 80, 90 y 2000, elegida prenda a prenda con medidas reales y estado explicado.',
     secciones: [
-      { h: 'Qué es {marca}', p: ['Una selección de ropa vintage de marca de los años 80, 90 y 2000, que se vende a través de Vinted y Wallapop.'] },
+      { h: 'Qué es {marca}', p: ['{marca} es una selección de ropa vintage de marca para hombre de los años 80, 90 y 2000: chaquetas deportivas, vaqueros, sudaderas, workwear y camisetas retro. Las prendas se venden a través de Vinted y Wallapop.'] },
       { h: 'Cómo seleccionamos', p: ['Elegimos las prendas una a una. Cada ficha incluye fotografías propias, medidas reales, el estado explicado y la marca y el modelo cuando se pueden identificar.'] },
       { h: 'Nuestra historia', p: ['{?Historia y propósito del proyecto}.'] },
       { h: 'Dónde comprar', p: ['Perfil en Vinted: {vinted}.', 'Perfil en Wallapop: {wallapop}.'] }
@@ -28,7 +28,7 @@ export const INFO = {
   },
   'envios-devoluciones': {
     titulo: 'Envíos y devoluciones',
-    descripcion: 'Cómo se gestionan los envíos, las devoluciones y las reclamaciones de las compras en Vinted y Wallapop.',
+    descripcion: 'Cómo funcionan los envíos, las devoluciones y las reclamaciones al comprar ropa vintage de Caroa Vintage a través de Vinted y Wallapop.',
     revisionLegal: true,
     secciones: [
       { h: 'Cómo se gestiona', p: ['Esta web no vende ni envía directamente. Cada compra se hace en Vinted o en Wallapop, y esa plataforma gestiona el pago, el envío y las reclamaciones según sus propias condiciones.'] },
@@ -39,7 +39,7 @@ export const INFO = {
   },
   contacto: {
     titulo: 'Contacto',
-    descripcion: 'Cómo contactar para consultas sobre prendas, tallas o pedidos.',
+    descripcion: 'Contacta con Caroa Vintage para resolver dudas sobre tallas, medidas, estado o disponibilidad de una prenda de ropa vintage de marca.',
     secciones: [
       { h: 'Consultas sobre una prenda', p: ['Lo más rápido es escribir por la mensajería del anuncio en Vinted ({vinted}) o Wallapop ({wallapop}).'] },
       { h: 'Otros asuntos', p: ['Correo electrónico: {email}.', 'Teléfono: {telefono}.'] }
@@ -47,7 +47,7 @@ export const INFO = {
   },
   'aviso-legal': {
     titulo: 'Aviso legal',
-    descripcion: 'Datos identificativos del titular del sitio web.',
+    descripcion: 'Aviso legal de Caroa Vintage: datos identificativos del titular de esta web de escaparate de ropa vintage de marca.',
     revisionLegal: true,
     secciones: [
       { h: 'Titular del sitio', p: ['Titular: {titular}.', 'NIF: {nif}.', 'Domicilio: {domicilio}.', 'Correo electrónico: {email}.', 'Teléfono: {telefono}.'] },
@@ -58,7 +58,7 @@ export const INFO = {
   },
   condiciones: {
     titulo: 'Condiciones de uso y de compra',
-    descripcion: 'Condiciones de uso de la web y funcionamiento de las compras a través de plataformas.',
+    descripcion: 'Condiciones de uso de la web de Caroa Vintage y funcionamiento de las compras de ropa vintage a través de Vinted y Wallapop.',
     revisionLegal: true,
     secciones: [
       { h: 'Qué es esta web', p: ['Un escaparate con las prendas disponibles. No se puede comprar ni pagar aquí.'] },
@@ -70,7 +70,7 @@ export const INFO = {
   },
   privacidad: {
     titulo: 'Política de privacidad',
-    descripcion: 'Cómo se tratan los datos personales en esta web.',
+    descripcion: 'Política de privacidad de Caroa Vintage: esta web de ropa vintage no recoge datos personales; qué ocurre al visitar Vinted o Wallapop.',
     revisionLegal: true,
     secciones: [
       { h: 'Responsable', p: ['{titular}, NIF {nif}, {domicilio}. Contacto: {email}.'] },
@@ -81,7 +81,7 @@ export const INFO = {
   },
   cookies: {
     titulo: 'Política de cookies',
-    descripcion: 'Información sobre cookies y almacenamiento en esta web.',
+    descripcion: 'Política de cookies de Caroa Vintage: esta web de ropa vintage de marca no instala cookies ni usa analítica ni publicidad.',
     revisionLegal: true,
     secciones: [
       { h: 'Qué usa esta web hoy', p: ['El código de esta web no instala cookies ni usa servicios de analítica, publicidad o almacenamiento local.'] },

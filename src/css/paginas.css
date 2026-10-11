@@ -40,3 +40,12 @@ select { font: inherit; padding: .5rem .6rem; border: 1px solid var(--navy); bor
 .info-nav h2 { font-size: 1.1rem; }
 .info-nav li { margin-bottom: .4rem; }
 .info-nav a[aria-current="page"] { font-weight: 700; color: var(--burdeos); }
+
+/* Categorías y SEO */
+.enlaces-cat { display: flex; flex-wrap: wrap; gap: .5rem .75rem; margin: 0 0 1rem; }
+.enlaces-cat a { display: inline-block; padding: .3rem .9rem; border: 1px solid var(--navy); border-radius: 999px; color: var(--navy); text-decoration: none; font-size: .95rem; }
+.enlaces-cat a:hover { background: var(--navy-claro); }
+.texto-seo { max-width: 46rem; }
+.revisamos { list-style: disc; padding-left: 1.25rem; max-width: 44rem; }
+.revisamos li { margin-bottom: .35rem; }
+.bloque .enlaces-cat { margin-top: .5rem; }

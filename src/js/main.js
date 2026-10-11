@@ -7,6 +7,7 @@ import { h } from './ui.js';
 const PAGINAS = {
   home: () => import('./home.js'),
   catalogo: () => import('./catalog.js'),
+  categoria: () => import('./categoria.js'),
   prenda: () => import('./product.js'),
   info: () => import('./info.js')
 };
@@ -14,7 +15,7 @@ const PAGINAS = {
 async function arrancar() {
   const pagina = document.body.dataset.page;
   const p = new URLSearchParams(location.search).get('p');
-  const activa = pagina === 'prenda' ? 'catalogo' : pagina === 'info' ? p : pagina;
+  const activa = pagina === 'prenda' ? 'catalogo' : pagina === 'categoria' ? 'categorias' : pagina === 'info' ? p : pagina;
   montarCabecera(activa);
   montarPie();
 

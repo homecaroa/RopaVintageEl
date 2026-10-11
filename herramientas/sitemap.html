@@ -21,7 +21,7 @@
   </main>
   <script type="module">
     import { SITE } from '../src/data/site.config.js';
-    import { PRODUCTS } from '../src/data/products.js';
+    import { PRODUCTS, CATEGORIA_URL } from '../src/data/products.js';
     import { INFO } from '../src/data/info-pages.js';
 
     const estado = document.getElementById('estado');
@@ -32,7 +32,7 @@
       estado.textContent = 'Falta el dominio: define "dominio" en src/data/site.config.js (por ejemplo "https://midominio.es") y recarga esta página.';
     } else {
       const base = SITE.dominio.replace(/\/$/, '');
-      const rutas = ['', 'catalogo.html',
+      const rutas = ['', 'catalogo.html', ...Object.values(CATEGORIA_URL),
         ...Object.keys(INFO).map((k) => `info.html?p=${k}`),
         ...PRODUCTS.filter((p) => p.estado === 'publicado').map((p) => `prenda.html?id=${encodeURIComponent(p.slug)}`)];
       salida.value = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +

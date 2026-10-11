@@ -1,5 +1,6 @@
 // Cabecera y pie compartidos por todas las páginas.
 import { SITE } from '../data/site.config.js';
+import { CATEGORIAS, CATEGORIA_URL } from '../data/products.js';
 import { h, urlPlataforma } from './ui.js';
 
 const NAV = [
@@ -36,7 +37,8 @@ export function montarCabecera(pagina) {
   }, 'Menú');
   const perfiles = perfilesExternos();
   cont.replaceChildren(h('div', { class: 'wrap bar' },
-    h('a', { class: 'logo', href: 'index.html' }, SITE.marca.nombre),
+    h('a', { class: 'logo', href: 'index.html', 'aria-label': `${SITE.marca.nombre}, inicio` },
+      h('img', { src: SITE.marca.logo, alt: '', width: 34, height: 48 }), h('span', { text: SITE.marca.nombre })),
     menu,
     perfiles.length ? h('div', { class: 'cab-enlaces' }, perfiles.map((x) => externo(x.nombre, x.url))) : null,
     boton));
@@ -47,14 +49,15 @@ export function montarPie() {
   if (!cont) return;
   const e = SITE.empresa;
   const titular = e.titular
-    ? [e.titular, e.nif, e.domicilio].filter(Boolean).join(' · ')
+    ? ['Titular: ' + e.titular, e.nif, e.domicilio].filter(Boolean).join(' · ') + '.'
     : 'Datos del titular pendientes de completar.';
   const columnas = COLUMNAS.map(([titulo, enlaces]) => [titulo, enlaces.map(([t, href]) => h('li', {}, h('a', { href }, t)))]);
+  columnas.splice(1, 0, ['Categorías', Object.entries(CATEGORIA_URL).map(([k, url]) => h('li', {}, h('a', { href: url }, CATEGORIAS[k])))]);
   const ext = perfilesExternos();
   if (ext.length) columnas[0][1].push(...ext.map((x) => h('li', {}, externo(`Comprar en ${x.nombre}`, x.url))));
   cont.replaceChildren(h('div', { class: 'wrap' },
     h('div', { class: 'pie-grid' },
       h('div', {}, h('p', { class: 'pie-marca', text: SITE.marca.nombre }), h('p', { text: SITE.marca.descripcion })),
       columnas.map(([titulo, items]) => h('nav', { 'aria-label': titulo }, h('h2', { class: 'pie-titulo', text: titulo }), h('ul', {}, items)))),
-    h('p', { class: 'pie-legal', text: `© ${new Date().getFullYear()} ${SITE.marca.nombre}. ${titular}${SITE.marca.esProvisional ? ' Sitio en construcción: contenido provisional.' : ''}` })));
+    h('p', { class: 'pie-legal', text: `© ${new Date().getFullYear()} ${SITE.marca.nombre}. ${titular}${SITE.enConstruccion ? ' Sitio en construcción: contenido provisional.' : ''}` })));
 }

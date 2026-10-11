@@ -1,5 +1,5 @@
 // Ficha de prenda: prenda.html?id=<slug>. La compra se hace en Vinted/Wallapop.
-import { PRODUCTS, CATEGORIAS, CONDICIONES, MEDIDAS, ETIQUETA_DISPONIBILIDAD } from '../data/products.js';
+import { PRODUCTS, CATEGORIAS, CATEGORIA_URL, CONDICIONES, MEDIDAS, ETIQUETA_DISPONIBILIDAD } from '../data/products.js';
 import { SITE } from '../data/site.config.js';
 import { h, imagenPrenda, tarjetaPrenda, botonPlataforma, urlPlataforma, precioTexto } from './ui.js';
 
@@ -17,6 +17,7 @@ function migas(p) {
   return h('nav', { 'aria-label': 'Migas de pan' }, h('ol', { class: 'migas' },
     h('li', {}, h('a', { href: 'index.html' }, 'Inicio')),
     h('li', {}, h('a', { href: 'catalogo.html' }, 'Prendas')),
+    h('li', {}, h('a', { href: CATEGORIA_URL[p.categoria] || 'catalogo.html' }, CATEGORIAS[p.categoria] || p.categoria)),
     h('li', { 'aria-current': 'page', text: p.nombre })));
 }
 
@@ -99,7 +100,7 @@ export function iniciar() {
   const p = PRODUCTS.find((x) => x.slug === slug && x.estado === 'publicado');
   if (!p) return noEncontrada(cont);
 
-  document.title = `${(p.seo && p.seo.titulo) || p.nombre} | ${SITE.marca.nombre}`;
+  document.title = `${(p.seo && p.seo.titulo) || `${p.nombre} ${p.marca} vintage, talla ${p.talla}`} | ${SITE.marca.nombre}`;
   document.querySelector('meta[name="description"]')?.setAttribute('content', (p.seo && p.seo.descripcion) || p.descripcion);
 
   cont.replaceChildren(...[

@@ -1,5 +1,5 @@
 // Utilidades compartidas: DOM seguro, formato de precios, enlaces a plataformas, ordenación y tarjeta de prenda.
-import { CATEGORIAS, CONDICIONES, ETIQUETA_DISPONIBILIDAD } from '../data/products.js';
+import { CATEGORIAS, CATEGORIA_URL, CONDICIONES, ETIQUETA_DISPONIBILIDAD } from '../data/products.js';
 import { SITE } from '../data/site.config.js';
 
 export const euros = new Intl.NumberFormat(SITE.idioma, { style: 'currency', currency: SITE.moneda });
@@ -54,7 +54,7 @@ const PRENDA_SVG =
 export function imagenPrenda(p) {
   const marco = h('div', { class: 'media' });
   if (p.imagenes && p.imagenes.length) {
-    marco.append(h('img', { src: p.imagenes[0], alt: `${p.nombre}, ${p.marca}, talla ${p.talla}`, loading: 'lazy', width: 600, height: 750 }));
+    marco.append(h('img', { src: p.imagenes[0], alt: `${p.nombre} vintage ${p.marca}, talla ${p.talla}`, loading: 'lazy', width: 600, height: 750 }));
   } else {
     const ph = h('div', { class: 'media-ph', role: 'img', 'aria-label': `Imagen provisional de ${p.nombre}` });
     ph.innerHTML = PRENDA_SVG; // constante estática
@@ -70,7 +70,7 @@ export function tarjetaPrenda(p, { nivel = 3 } = {}) {
   return h('article', { class: 'card' + (vendida ? ' card-agotado' : '') },
     imagenPrenda(p),
     h('div', { class: 'card-body' },
-      h('p', { class: 'chip', text: CATEGORIAS[p.categoria] || p.categoria }),
+      h('a', { class: 'chip', href: CATEGORIA_URL[p.categoria] || 'catalogo.html', text: CATEGORIAS[p.categoria] || p.categoria }),
       h(`h${nivel}`, {}, h('a', { href: `prenda.html?id=${encodeURIComponent(p.slug)}` }, p.nombre)),
       h('p', { class: 'card-resumen', text: `${p.marca} · Talla ${p.talla}` }),
       h('p', { class: 'card-meta', text: `${CONDICIONES[p.condicion] || ''} · ${p.epoca}` }),

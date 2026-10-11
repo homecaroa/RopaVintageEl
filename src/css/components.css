@@ -104,3 +104,9 @@
 
 .btn-pendiente { background: transparent; color: var(--navy); border: 2px dashed var(--navy); cursor: not-allowed; opacity: .8; }
 .badge-estado { background: var(--burdeos-claro); color: var(--burdeos); font-weight: 600; margin-bottom: .35rem; }
+
+/* Logotipo */
+.logo { display: flex; align-items: center; gap: .6rem; }
+.logo img { height: 2.8rem; width: auto; }
+.hero-visual img { height: clamp(13rem, 42vw, 21rem); width: auto; margin: 0 auto; }
+a.chip:hover { background: #d9dfc3; }
